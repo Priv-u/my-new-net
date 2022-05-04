@@ -1,6 +1,7 @@
 .appHeader {
-  grid-column: 1/3;
+  grid-column: 1/4;
   grid-row: 1/2;
-  background-color: darkgreen;
-
+  background-color: #4b8c4b;
+  color: white;
+  font-weight: bold;
 }
