@@ -1,6 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
 
+const Navbar = () => {
+return(
+  <div>
+    Новый текст из нового блока
+  </div>
+
+)
+}
+  
+
 const App = () => {
   return (
     <div className="App">
@@ -9,6 +19,7 @@ const App = () => {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
+        <Navbar/>
         <a
           className="App-link"
           href="https://reactjs.org"
