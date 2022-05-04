@@ -18,12 +18,20 @@ return(
 )
 }
   
+const Profile = () => {
+  return(
+    <div>
+      Основной профиль
+    </div>
+  )
+}
 
 const App = () => {
   return (
     <div className="App">
         <Header/>
         <Navbar/>
+        <Profile/>
         
     </div>
   );
