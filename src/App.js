@@ -1,25 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
+import Navbar from './components/Navbar/Navbar';
+import Header from './components/Header/Header';
 
-
-const Header = () => {
-  return(
-    <div>
-      Заголовок
-    </div>
-  )
-}
-
-const Navbar = () => {
-return(
-  <div>
-    Новый текст из нового блока
-  </div>
-)
-}
-  
 const Profile = () => {
-  return(
+  return (
     <div>
       Основной профиль
     </div>
@@ -28,11 +12,11 @@ const Profile = () => {
 
 const App = () => {
   return (
-    <div className="App">
-        <Header/>
-        <Navbar/>
-        <Profile/>
-        
+    <div className="app-wrapper">
+      <Header />
+      <Navbar />
+      <Profile />
+
     </div>
   );
 }

@@ -1,0 +1,75 @@
+.navbar {
+  display: grid;
+  grid-template-columns: 20px 20px 2fr 20px;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  background-color: rgb(163, 126, 113);
+  padding: 15px 5px 5px 5px;
+  font-weight: bold;
+  gap: 5px;
+  color: white;
+}
+
+.profile {
+  grid-column: 3/4;
+  grid-row: 1/2;
+  padding: 5px 5px 5px 15px;
+  border: rgb(79, 60, 12) solid 1px;
+  border-radius: 10px;
+}
+
+.profile:hover {
+  background-color: white;
+  color: brown;
+}
+
+.dialogs {
+  grid-column: 3/4;
+  grid-row: 2/3;
+  padding: 5px 5px 5px 15px;
+  border: rgb(79, 60, 12) solid 1px;
+  border-radius: 10px;
+}
+
+.dialogs:hover {
+  background-color: white;
+  color: brown;
+}
+
+.news {
+  grid-column: 3/4;
+  grid-row: 3/4;
+  padding: 5px 5px 5px 15px;
+  border: rgb(79, 60, 12) solid 1px;
+  border-radius: 10px;
+}
+
+.news:hover {
+  background-color: white;
+  color: brown;
+}
+
+.gallery {
+  grid-column: 3/4;
+  grid-row: 4/5;
+  padding: 5px 5px 5px 15px;
+  border: rgb(79, 60, 12) solid 1px;
+  border-radius: 10px;
+}
+
+.gallery:hover {
+  background-color: white;
+  color: brown;
+}
+
+.settings {
+  grid-column: 3/4;
+  grid-row: 6/7;
+  padding: 5px 5px 5px 15px;
+  border: rgb(79, 60, 12) solid 1px;
+  border-radius: 10px;
+}
+
+.settings:hover {
+  background-color: white;
+  color: brown;
+}
