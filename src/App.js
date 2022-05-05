@@ -5,10 +5,13 @@ import Header from './components/Header/Header';
 
 const Profile = () => {
   return (
-    <div>
-      <img src={require('./images/mountains.jpg')} alt='Красивый пейзаж' />
-      Новые сообщения, которые будут добавляться на ленту.
-      Основной профиль
+    <div className='profile'>
+      <div>
+        <img src={require('./images/mountains.jpg')} alt='Красивый пейзаж' />
+      </div>
+      <div>
+        Новые сообщения, которые будут добавляться на ленту.
+      </div>
     </div>
   )
 }

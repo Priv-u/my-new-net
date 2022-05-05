@@ -3,3 +3,7 @@
   grid-template-columns: 5px 130px 11fr;
   grid-template-rows: 60px 1fr;
 }
+
+.profile img {
+  width: 100%;
+}
