@@ -1,3 +1,4 @@
+import React from 'react';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import Header from './components/Header/Header';
@@ -5,6 +6,8 @@ import Header from './components/Header/Header';
 const Profile = () => {
   return (
     <div>
+      <img src='' alt='Красивый пейзаж' />
+      Новые сообщения, которые будут добавляться на ленту.
       Основной профиль
     </div>
   )
