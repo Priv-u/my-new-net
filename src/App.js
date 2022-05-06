@@ -10,7 +10,13 @@ const Profile = () => {
         <img src={require('./images/mountains.jpg')} alt='Красивый пейзаж' />
       </div>
       <div>
-        Новые сообщения, которые будут добавляться на ленту.
+        Пост 1
+      </div>
+      <div>
+        Пост 2
+      </div>
+      <div>
+        Пост 3
       </div>
     </div>
   )
