@@ -1,7 +1,6 @@
 .navbar {
   grid-column: 1/3;
   grid-row: 2/3;
-  
 }
 
 .navBattons {
@@ -26,6 +25,7 @@
 .profile:hover {
   background-color: white;
   color: brown;
+  text-decoration: none;
 }
 
 .dialogs {
