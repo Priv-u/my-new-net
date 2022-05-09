@@ -6,6 +6,33 @@
   font-weight: bold;
 }
 
-.appHeader img {
+.headerContent {
+  display: grid;
+  grid-template-columns: 150px 1fr 150px;
+  grid-template-rows: 20px 20px 20px;
+  padding: 5px;
+}
+
+
+.mySimbol img {
+  grid-column: 1/2;
+  grid-row: 1/4;
   height: 50px;
+}
+
+.headerText {
+  grid-column: 2/3;
+  grid-row: 1/4;
+  text-align: center;
+  font-size: 30px;
+  font-style: italic;
+  padding-top: 10px;
+
+}
+
+.signIn {
+  grid-column: 3/4;
+  grid-row: 2/3;
+  font-weight: normal;
+  cursor: pointer;
 }
