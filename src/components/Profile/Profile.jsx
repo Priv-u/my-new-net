@@ -20,7 +20,7 @@ const Profile = (props) => {
       <div className={s.newMessage}>
         <textarea></textarea>
         <div className={s.newMessageButton}>
-          <button>Новый пост</button>
+          <button onClick={props.addPost}>Новый пост</button>
         </div>
       </div>
       <div className={s.posts}>

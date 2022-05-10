@@ -1,3 +1,5 @@
+import { rerenderEntireTree } from './../index';
+
 
 let state = {
   profilePage: {
@@ -36,3 +38,19 @@ let state = {
 }
 export default state;
 
+export const addPost = () => {
+  console.log('Отправлено при нажатии кнопки');
+  let newPostText = {
+    id: 6,
+    message: 'Первое сообщение отправленное из колбэка',
+    messageDate: '10.05.2022',
+    likesCount: 0
+  }
+  state.profilePage.posts.push(newPostText);
+  rerenderEntireTree();
+  // debugger;
+  // alert('Нажатк кнопка НОВЫЙ ПОСТ')
+}
+
+//TODO Необходимо переписать rerenderEntireTree таким образом, чтобы избавиться от импорта
+// этой функции в state

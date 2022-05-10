@@ -3,7 +3,7 @@ import s from './Messages.module.css'
 
 
 const Messages = (props) => {
-  debugger;
+  // debugger;
   let message = props.messages.map(m => <div> {m.id} {m.message} {m.messageDate} {m.messageTime}</div>);
   return (
     <div className={s.messages}>
