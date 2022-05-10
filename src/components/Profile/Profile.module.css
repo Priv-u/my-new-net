@@ -24,3 +24,7 @@
   height: 480px;
   overflow-y: auto;
 }
+
+.posts img {
+  width: 80px;
+}

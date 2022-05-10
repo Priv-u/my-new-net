@@ -1,33 +1,15 @@
 import React from "react";
+import s from './Dialogs.module.css';
+import Dialog from './Dialog/Dialog';
+import Messages from "./Messages/Messages";
 
-const Dialogs = () => {
+
+
+const Dialogs = (props) => {
   return (
-    <div>
-      Диалоги
-      <div>
-        <div>
-          Диалог 1
-        </div>
-        <div>
-          Диалог 2
-        </div>
-        <div>
-          Диалог 3
-        </div>
-      </div>
-      <div>
-        Сообщения
-        <div>
-          Сообщение 1
-        </div>
-        <div>
-          Сообщение 2
-        </div>
-        <div>
-          Сообщение 3
-        </div>
-      </div>
-
+    <div className={s.dialogsWrapper}>
+      <Dialog dialogs={props.dialogsPage.dialogs} />
+      <Messages messages={props.dialogsPage.messages} newMessage={props.dialogsPage.newMessage} />
     </div>
   );
 }
