@@ -19,6 +19,8 @@
   border-bottom: 1px solid black;
   text-align: justify;
   padding-bottom: 10px;
+  white-space: pre-line;
+
 }
 
 .postId {
@@ -29,6 +31,10 @@
 .likes {
   grid-column: 3/4;
   grid-row: 4/5;
+}
+
+.likes:hover {
+  cursor: pointer;
 }
 
 .date {

@@ -12,6 +12,8 @@
   width: inherit;
   /* height: inherit; */
   resize: none;
+  white-space: pre-wrap;
+
 }
 
 .newMessageButton {

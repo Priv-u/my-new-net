@@ -3,23 +3,25 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import state from './redux/state';
-import { addPost } from './redux/state';
+import store from './redux/state';
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+// При передаче  методов через пропсы необходимо эти 
+// методы забиндить на владельца т.е. store
 
-export const rerenderEntireTree = () => {
+const rerenderEntireTree = (state) => {
   root.render(
+
     <React.StrictMode>
-      <App state={state} addPost={addPost} />
+      <App state={state} addPost={store.addPost.bind(store)} updateNewPost={store.updateNewPost.bind(store)} />
     </React.StrictMode>
   );
 }
 
-rerenderEntireTree();
+rerenderEntireTree(store.getState());
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+store.subscribe(rerenderEntireTree);
+
 reportWebVitals();

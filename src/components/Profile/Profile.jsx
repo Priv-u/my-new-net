@@ -3,14 +3,29 @@ import Post from './Post/Post';
 import s from './Profile.module.css';
 
 
+
+
 const Profile = (props) => {
-  // debugger;
-  let posts = props.profilePage.posts.map((p) =>
+  let postElements = props.posts.map((p) =>
     <Post id={p.id}
       message={p.message}
       messageDate={p.messageDate}
-      likesCount={p.likesCount} />)
+      likesCount={p.likesCount} />);
 
+  let newPostElement = React.createRef();
+
+  let addPost = () => {
+    let text = newPostElement.current.value;
+    props.addPost(text);
+  }
+
+  let onPostChange = () => {
+    debugger;
+    let text = newPostElement.current.value;
+    // debugger;
+    props.updateNewPost(text);
+  }
+  //TODO дописать функцию
   return (
     <div>
       <div>
@@ -18,13 +33,14 @@ const Profile = (props) => {
       </div>
 
       <div className={s.newMessage}>
-        <textarea></textarea>
+        <textarea onChange={onPostChange} ref={newPostElement} value={props.newPost} />
+
         <div className={s.newMessageButton}>
-          <button onClick={props.addPost}>Новый пост</button>
+          <button onClick={addPost}>Новый пост</button>
         </div>
       </div>
       <div className={s.posts}>
-        {posts}
+        {postElements}
       </div>
 
     </div>

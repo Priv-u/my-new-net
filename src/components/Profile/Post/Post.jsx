@@ -10,10 +10,10 @@ const Post = (props) => {
         <img src={require('./../../../images/kote.jpg')} alt="" />
       </div>
       <div className={s.postId}>
-        poast id:{props.id}
+        post id:{props.id}
       </div>
       <div className={s.message}>
-        {props.message}
+        <p>{props.message}</p>
       </div>
       <div className={s.date}>
         {props.messageDate}
