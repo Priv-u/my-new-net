@@ -35,58 +35,49 @@ let store = {
       newMessage: 'Новое сообщение'
     }
   },
-
   _callSubscriber() {
     alert('Стэйт изменен');
   },
-
   getState() {
-    debugger;
+    // debugger;
     return this._state;
   },
-
-  addPost() {
-    debugger;
-    let newPostId = this._state.profilePage.posts.length + 1;
-    let date = new Date();
-    let now = {
-      day: date.getDate(),
-      month: date.getMonth() + 1,
-      year: date.getFullYear()
-    }
-    if (now.day < 10) {
-      now.day = String('0' + now.day);
-    }
-    if (now.month < 10) {
-      now.month = String('0' + now.month);
-    }
-    let newPostText = {
-      id: newPostId,
-      message: this._state.profilePage.newPost,
-      messageDate: String(now.day + '/' + now.month + '/' + now.year),
-      likesCount: 0
-    }
-    if (newPostText.message !== '') {
-      this._state.profilePage.posts.push(newPostText);
-      this._state.profilePage.newPost = '';
-    }
-
-    this._callSubscriber(this._state);
-  },
-
-  updateNewPost(newText) {
-    debugger;
-    this._state.profilePage.newPost = newText;
-
-    this._callSubscriber(this._state);
-  },
-
   subscribe(observer) {
     this._callSubscriber = observer;
+  },
+  dispatch(action) {
+    if (action.type === 'ADD-POST') {
+      let newPostId = this._state.profilePage.posts.length + 1;
+      let date = new Date();
+      let now = {
+        day: date.getDate(),
+        month: date.getMonth() + 1,
+        year: date.getFullYear()
+      }
+      if (now.day < 10) {
+        now.day = String('0' + now.day);
+      }
+      if (now.month < 10) {
+        now.month = String('0' + now.month);
+      }
+      let newPostText = {
+        id: newPostId,
+        message: this._state.profilePage.newPost,
+        messageDate: String(now.day + '/' + now.month + '/' + now.year),
+        likesCount: 0
+      }
+      if (newPostText.message !== '') {
+        this._state.profilePage.posts.push(newPostText);
+        this._state.profilePage.newPost = '';
+      }
+      this._callSubscriber(this._state);
+    }
+    if (action.type === 'UPDATE-NEW-POST') {
+      this._state.profilePage.newPost = action.newText;
+      this._callSubscriber(this._state);
+    }
+
   }
-
 }
-
 export default store;
-//TODO Необходимо переписать rerenderEntireTree таким образом, чтобы избавиться от импорта
-// этой функции в state
+window.store = store;

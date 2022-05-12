@@ -15,17 +15,18 @@ const Profile = (props) => {
   let newPostElement = React.createRef();
 
   let addPost = () => {
-    let text = newPostElement.current.value;
-    props.addPost(text);
+    let action = { type: 'ADD-POST' }
+    props.dispatch(action);
   }
 
   let onPostChange = () => {
     debugger;
     let text = newPostElement.current.value;
     // debugger;
-    props.updateNewPost(text);
+    let action = { type: 'UPDATE-NEW-POST', newText: text };
+    props.dispatch(action);
   }
-  //TODO дописать функцию
+
   return (
     <div>
       <div>
