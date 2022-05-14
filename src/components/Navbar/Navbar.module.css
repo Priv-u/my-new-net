@@ -4,9 +4,16 @@
 }
 
 .navBattons a:hover {
+  text-decoration: none;
+  background-color: white;
   color: brown;
-
 }
+
+/* .navBattons a:hover {
+  color: brown;
+  background-color: white;
+
+} */
 
 .navbar {
   grid-column: 1/3;

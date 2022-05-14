@@ -1,7 +1,7 @@
 .dialogsWrapper {
   display: grid;
   grid-template-columns: 1fr 5fr;
-  grid-template-rows: 60px 1 fr;
+  grid-template-rows: 60px 1fr;
   padding: 5px;
 }
 

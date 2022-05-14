@@ -1,8 +1,7 @@
 import React from "react";
 import Post from './Post/Post';
 import s from './Profile.module.css';
-
-
+import { addPostActionCreator, updateNewPostActionCreator } from './../../redux/state'
 
 
 const Profile = (props) => {
@@ -12,19 +11,20 @@ const Profile = (props) => {
       messageDate={p.messageDate}
       likesCount={p.likesCount} />);
 
+  let postElementsUi = postElements.reverse();
+
   let newPostElement = React.createRef();
 
   let addPost = () => {
-    let action = { type: 'ADD-POST' }
-    props.dispatch(action);
+    props.dispatch(addPostActionCreator());
   }
 
   let onPostChange = () => {
     debugger;
     let text = newPostElement.current.value;
     // debugger;
-    let action = { type: 'UPDATE-NEW-POST', newText: text };
-    props.dispatch(action);
+    // let action = { type: 'UPDATE-NEW-POST', newText: text };
+    props.dispatch(updateNewPostActionCreator(text));
   }
 
   return (
@@ -41,7 +41,7 @@ const Profile = (props) => {
         </div>
       </div>
       <div className={s.posts}>
-        {postElements}
+        {postElementsUi}
       </div>
 
     </div>

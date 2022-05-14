@@ -9,7 +9,10 @@ const Dialogs = (props) => {
   return (
     <div className={s.dialogsWrapper}>
       <Dialog dialogs={props.dialogsPage.dialogs} />
-      <Messages messages={props.dialogsPage.messages} newMessage={props.dialogsPage.newMessage} />
+      <Messages
+        messages={props.dialogsPage.messages}
+        newMessage={props.dialogsPage.newMessage}
+        dispatch={props.dispatch} />
     </div>
   );
 }
