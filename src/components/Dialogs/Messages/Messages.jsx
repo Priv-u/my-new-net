@@ -1,12 +1,10 @@
 import React from "react";
 import s from './Messages.module.css'
-import { addMessageActionCreator, updateNewMessageActionCreator } from './../../../redux/state'
+import { addMessageActionCreator, updateNewMessageActionCreator } from './../../../redux/dialog-reducer'
 import Message from "./Message/Message";
 
 
 const Messages = (props) => {
-
-  let newMessageElement = React.createRef();
 
   let allMessagesBlock = React.createRef();
 
@@ -21,8 +19,8 @@ const Messages = (props) => {
     scrollToBottom();
   }
 
-  let onMessageChange = () => {
-    let text = newMessageElement.current.value;
+  let onMessageChange = (e) => {
+    let text = e.currentTarget.value;
     props.dispatch(updateNewMessageActionCreator(text));
   }
 
@@ -40,7 +38,7 @@ const Messages = (props) => {
       <div className={s.newMessage}>
 
         <div className={s.text}>
-          <textarea onChange={onMessageChange} ref={newMessageElement} value={props.newMessage}></textarea>
+          <textarea onChange={onMessageChange} value={props.newMessage}></textarea>
         </div>
         <div className={s.sendMessage}>
           <button onClick={addMessage}>Отправить</button>

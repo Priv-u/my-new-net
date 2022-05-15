@@ -1,10 +1,11 @@
 import React from "react";
 import Post from './Post/Post';
 import s from './Profile.module.css';
-import { addPostActionCreator, updateNewPostActionCreator } from './../../redux/state'
+import { addPostActionCreator, updateNewPostActionCreator } from './../../redux/profile-reducer'
 
 
 const Profile = (props) => {
+
   let postElements = props.posts.map((p) =>
     <Post id={p.id}
       message={p.message}
@@ -13,17 +14,13 @@ const Profile = (props) => {
 
   let postElementsUi = postElements.reverse();
 
-  let newPostElement = React.createRef();
-
   let addPost = () => {
     props.dispatch(addPostActionCreator());
   }
 
-  let onPostChange = () => {
-    debugger;
-    let text = newPostElement.current.value;
-    // debugger;
-    // let action = { type: 'UPDATE-NEW-POST', newText: text };
+  let onPostChange = (e) => {
+
+    let text = e.currentTarget.value;
     props.dispatch(updateNewPostActionCreator(text));
   }
 
@@ -34,7 +31,7 @@ const Profile = (props) => {
       </div>
 
       <div className={s.newMessage}>
-        <textarea onChange={onPostChange} ref={newPostElement} value={props.newPost} />
+        <textarea onChange={onPostChange} value={props.newPost} />
 
         <div className={s.newMessageButton}>
           <button onClick={addPost}>Новый пост</button>
