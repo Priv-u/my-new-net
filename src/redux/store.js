@@ -56,6 +56,5 @@ let store = {
 
   }
 }
-//TODO Дописать функции для работы со страницей диалогов
 export default store;
 window.store = store;

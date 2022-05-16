@@ -6,8 +6,8 @@ import Messages from './Messages';
 const MessagesContainer = (props) => {
 
   let state = props.store.getState();
-  // TODO Такой вариант прокрутки на последний элемент не работает. Возможно в будущем
-  // нужно будет реализовать эту функцию в стэйте... 
+  // TODO Просмотреть видео до 48 и переписать компоненты с помощью 
+  // ract-redux и connet 
 
   let addMessage = () => {
     props.store.dispatch(addMessageActionCreator());
