@@ -1,27 +1,22 @@
 import React from "react";
 import s from './Messages.module.css'
-import { addMessageActionCreator, updateNewMessageActionCreator } from './../../../redux/dialog-reducer'
 import Message from "./Message/Message";
 
 
 const Messages = (props) => {
 
-  let allMessagesBlock = React.createRef();
-
-  let scrollToBottom = () => {
-    allMessagesBlock.current.scrollTop = allMessagesBlock.current.scrollHeight;
-  }
   // TODO Такой вариант прокрутки на последний элемент не работает. Возможно в будущем
   // нужно будет реализовать эту функцию в стэйте... 
 
   let addMessage = () => {
-    props.dispatch(addMessageActionCreator());
-    scrollToBottom();
+    props.addMessage();
+
   }
 
   let onMessageChange = (e) => {
     let text = e.currentTarget.value;
-    props.dispatch(updateNewMessageActionCreator(text));
+    props.updateNewMessageText(text);
+
   }
 
   let messageUi = props.messages.map(m => <Message
@@ -32,7 +27,7 @@ const Messages = (props) => {
 
   return (
     <div >
-      <div className={s.messages} ref={allMessagesBlock}>
+      <div className={s.messages}>
         {messageUi}
       </div>
       <div className={s.newMessage}>

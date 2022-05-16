@@ -1,18 +1,15 @@
 import React from "react";
 import s from './Dialogs.module.css';
 import Dialog from './Dialog/Dialog';
-import Messages from "./Messages/Messages";
+import MessagesContainer from "./Messages/MessagesContainer";
 
 
 
 const Dialogs = (props) => {
   return (
     <div className={s.dialogsWrapper}>
-      <Dialog dialogs={props.dialogsPage.dialogs} />
-      <Messages
-        messages={props.dialogsPage.messages}
-        newMessage={props.dialogsPage.newMessage}
-        dispatch={props.dispatch} />
+      <Dialog dialogs={props.store.getState().dialogsPage.dialogs} />
+      <MessagesContainer store={props.store} />
     </div>
   );
 }

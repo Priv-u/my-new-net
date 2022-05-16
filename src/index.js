@@ -10,13 +10,12 @@ import store from './redux/redux-store';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 // При передаче  методов через пропсы необходимо эти 
 // методы забиндить на владельца т.е. store
-// store.updateNewPost.bind(store)
 
-let rerenderEntireTree = (state) => {
+let rerenderEntireTree = () => {
   root.render(
 
     <React.StrictMode>
-      <App state={state} dispatch={store.dispatch.bind(store)} />
+      <App store={store} />
     </React.StrictMode>
   );
 }
