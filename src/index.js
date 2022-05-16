@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import store from './redux/state';
+import store from './redux/redux-store';
 
 
 
@@ -25,7 +25,11 @@ rerenderEntireTree(store.getState());
 
 // При использовании методов нет тебходимости биндить метод к владельцу, т.к. вызов метода сразу
 // выполняется от его владельца.
-store.subscribe(rerenderEntireTree);
+store.subscribe(() => {
+  let state = store.getState();
+  rerenderEntireTree(state);
+}
+);
 
 reportWebVitals();
-//TODO почитить про binb в JavaScript и в React
+//TODO Проработать активность кнопок в Навбаре

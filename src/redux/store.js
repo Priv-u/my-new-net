@@ -50,8 +50,8 @@ let store = {
 
 
   dispatch(action) {
-    this._state.profilePage = profileReducer(action, this._state.profilePage);
-    this._state.dialogsPage = dialogReducer(action, this._state.dialogsPage)
+    this._state.profilePage = profileReducer(this._state.profilePage, action);
+    this._state.dialogsPage = dialogReducer(this._state.dialogsPage, action)
     this._callSubscriber(this._state);
 
   }
