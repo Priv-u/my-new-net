@@ -50,22 +50,33 @@ const dialogReducer = (state = initialState, action) => {
       if (now.minutes < 10) {
         now.minutes = String('0' + now.minutes);
       }
+
       let newMessageText = {
         id: newMessageId,
         message: state.newMessage,
         messageDate: String(now.day + '/' + now.month + '/' + now.year),
-        messageTime: String(now.hours + ':' + now.minutes),
+        messageTime: String(now.hours + ':' + now.minutes)
       }
-      debugger;
+
+      let stateCopy = { ...state };
+      stateCopy.messages = [...state.messages];
+
       if (newMessageText.message !== '') {
-        state.messages.push(newMessageText);
-        state.newMessage = '';
+        stateCopy.newMessage = '';
+        debugger;
+        stateCopy.messages.push(newMessageText);
+
       }
-      return state;
+      return stateCopy;
 
     case UPDATE_NEW_DIALOG_MESSAGE:
-      state.newMessage = action.newMessageFromUi;
-      return state;
+      {
+        debugger;
+        let stateCopy = { ...state };
+        stateCopy.newMessage = action.newMessageFromUi;
+        return stateCopy;
+      }
+
 
     default:
       return state;

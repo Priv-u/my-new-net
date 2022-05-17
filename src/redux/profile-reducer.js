@@ -17,34 +17,41 @@ const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST:
 
-      let newPostId = state.posts.length + 1;
-      let date = new Date();
-      let now = {
-        day: date.getDate(),
-        month: date.getMonth() + 1,
-        year: date.getFullYear()
+      {
+        let newPostId = state.posts.length + 1;
+        let date = new Date();
+        let now = {
+          day: date.getDate(),
+          month: date.getMonth() + 1,
+          year: date.getFullYear()
+        }
+        if (now.day < 10) {
+          now.day = String('0' + now.day);
+        }
+        if (now.month < 10) {
+          now.month = String('0' + now.month);
+        }
+        let newPostText = {
+          id: newPostId,
+          message: state.newPost,
+          messageDate: String(now.day + '/' + now.month + '/' + now.year),
+          likesCount: 0
+        }
+        let stateCopy = { ...state };
+        stateCopy.posts = [...state.posts];
+
+        if (newPostText.message !== '') {
+          stateCopy.newPost = '';
+          stateCopy.posts.push(newPostText);
+        }
+        return stateCopy;
       }
-      if (now.day < 10) {
-        now.day = String('0' + now.day);
-      }
-      if (now.month < 10) {
-        now.month = String('0' + now.month);
-      }
-      let newPostText = {
-        id: newPostId,
-        message: state.newPost,
-        messageDate: String(now.day + '/' + now.month + '/' + now.year),
-        likesCount: 0
-      }
-      if (newPostText.message !== '') {
-        state.posts.push(newPostText);
-        state.newPost = '';
-      }
-      return state;
 
     case UPDATE_NEW_POST:
-      state.newPost = action.newText;
-      return state;
+
+      let stateCopy = { ...state };
+      stateCopy.newPost = action.newText;
+      return stateCopy;
 
     default:
       return state;

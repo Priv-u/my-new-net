@@ -4,7 +4,7 @@ import s from './Profile.module.css';
 
 
 const Profile = (props) => {
-  debugger;
+  // debugger;
   let postElements = props.posts.map((p) => <Post id={p.id} message={p.message} messageDate={p.messageDate} likesCount={p.likesCount} />);
 
   let postElementsUi = postElements.reverse();

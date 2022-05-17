@@ -1,19 +1,8 @@
-.navBattons a {
-  text-decoration: none;
-  color: white;
-}
-
 .navBattons a:hover {
   text-decoration: none;
   background-color: white;
   color: brown;
 }
-
-/* .navBattons a:hover {
-  color: brown;
-  background-color: white;
-
-} */
 
 .navbar {
   grid-column: 1/3;
@@ -28,74 +17,52 @@
   padding: 12px 5px 0px 5px;
   font-weight: bold;
   gap: 5px;
-  color: #000000;
   cursor: pointer;
-
 }
+
+.item {
+  padding: 5px 5px 5px 10px;
+  border: #adaba7 solid 1px;
+  border-radius: 10px;
+}
+
+.item:hover {
+  background-color: white;
+  color: brown;
+}
+
 
 .profile {
   grid-column: 2/3;
   grid-row: 1/2;
-  padding: 5px 5px 5px 10px;
-  border: #adaba7 solid 1px;
-  border-radius: 10px;
-
-
-}
-
-.profile:hover {
-  background-color: white;
-  color: brown;
 }
 
 .dialogs {
   grid-column: 2/3;
   grid-row: 2/3;
-  padding: 5px 5px 5px 10px;
-  border: #adaba7 solid 1px;
-  border-radius: 10px;
-}
-
-.dialogs:hover {
-  background-color: white;
-  color: brown;
 }
 
 .news {
   grid-column: 2/3;
   grid-row: 3/4;
-  padding: 5px 5px 5px 10px;
-  border: #adaba7 solid 1px;
-  border-radius: 10px;
-}
-
-.news:hover {
-  background-color: white;
-  color: brown;
 }
 
 .gallery {
   grid-column: 2/3;
   grid-row: 4/5;
-  padding: 5px 5px 5px 10px;
-  border: #adaba7 solid 1px;
-  border-radius: 10px;
-}
-
-.gallery:hover {
-  background-color: white;
-  color: brown;
 }
 
 .settings {
   grid-column: 2/3;
   grid-row: 6/7;
-  padding: 5px 5px 5px 10px;
-  border: #adaba7 solid 1px;
-  border-radius: 10px;
 }
 
-.settings:hover {
-  background-color: white;
-  color: brown;
+.active {
+  color: goldenrod;
+  text-decoration: none;
+}
+
+.inactive {
+  color: white;
+  text-decoration: none;
 }

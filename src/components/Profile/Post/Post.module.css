@@ -19,6 +19,8 @@
   border-bottom: 1px solid black;
   text-align: justify;
   padding-bottom: 10px;
+  width: inherit;
+  resize: none;
   white-space: pre-line;
 
 }

@@ -3,23 +3,24 @@ import { NavLink } from "react-router-dom";
 import s from './Navbar.module.css'
 
 const Navbar = () => {
+  const setActive = ({ isActive }) => (isActive ? s.active : s.inactive);
   return (
     <nav className={s.navbar}>
       <div className={s.navBattons}>
-        <div className={s.profile}>
-          <NavLink to='/profile'>Profile</NavLink>
+        <div className={`${s.item} ${s.profile}`}>
+          <NavLink to='/profile' className={setActive}>Profile</NavLink>
         </div>
-        <div className={s.dialogs}>
-          <NavLink to='/dialogs'>Dialogs</NavLink>
+        <div className={`${s.item} ${s.dialogs}`}>
+          <NavLink to='/dialogs' className={setActive}>Dialogs</NavLink>
         </div>
-        <div className={s.news}>
-          <a href="/news">News</a>
+        <div className={`${s.item} ${s.news}`}>
+          <NavLink to='/news' className={setActive}>News</NavLink>
         </div>
-        <div className={s.gallery}>
-          <a href="/gallery">Gallery</a>
+        <div className={`${s.item} ${s.gallery}`}>
+          <NavLink to='/gallery' className={setActive}>Gallery</NavLink>
         </div>
-        <div className={s.settings}>
-          <a href="/settings">Settings</a>
+        <div className={`${s.item} ${s.settings}`}>
+          <NavLink to='/settings' className={setActive}>Settings</NavLink>
 
         </div>
       </div>

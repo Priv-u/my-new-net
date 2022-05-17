@@ -1,15 +1,15 @@
 import React from "react";
 import s from './Dialogs.module.css';
-import Dialog from './Dialog/Dialog';
 import MessagesContainer from "./Messages/MessagesContainer";
+import DialogContainer from "./Dialog/DialogContainer";
 
 
 
-const Dialogs = (props) => {
+const Dialogs = () => {
   return (
     <div className={s.dialogsWrapper}>
-      <Dialog dialogs={props.store.getState().dialogsPage.dialogs} />
-      <MessagesContainer store={props.store} />
+      <DialogContainer />
+      <MessagesContainer />
     </div>
   );
 }

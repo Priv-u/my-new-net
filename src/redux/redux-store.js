@@ -1,4 +1,4 @@
-import { combineReducers, createStore } from "redux";
+import { combineReducers, legacy_createStore as createStore } from "redux";
 import profileReducer from './profile-reducer';
 import dialogReducer from './dialog-reducer';
 
@@ -12,5 +12,7 @@ let reducers = combineReducers(
 );
 
 let store = createStore(reducers);
+
+window.store = store;
 
 export default store;
