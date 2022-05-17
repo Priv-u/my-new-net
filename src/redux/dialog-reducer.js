@@ -26,6 +26,9 @@ let initialState = {
 }
 
 const dialogReducer = (state = initialState, action) => {
+
+
+
   switch (action.type) {
     case ADD_NEW_DIALOG_MESSAGE:
 
@@ -58,25 +61,20 @@ const dialogReducer = (state = initialState, action) => {
         messageTime: String(now.hours + ':' + now.minutes)
       }
 
-      let stateCopy = { ...state };
-      stateCopy.messages = [...state.messages];
-
       if (newMessageText.message !== '') {
-        stateCopy.newMessage = '';
-        debugger;
-        stateCopy.messages.push(newMessageText);
-
+        return {
+          ...state,
+          messages: [...state.messages, newMessageText],
+          newMessage: ''
+        }
       }
-      return stateCopy;
+      break;
 
     case UPDATE_NEW_DIALOG_MESSAGE:
-      {
-        debugger;
-        let stateCopy = { ...state };
-        stateCopy.newMessage = action.newMessageFromUi;
-        return stateCopy;
+      return {
+        ...state,
+        newMessage: action.newMessageFromUi
       }
-
 
     default:
       return state;
