@@ -1,0 +1,81 @@
+.user {
+  display: grid;
+  grid-template-columns: 100px 1fr 600px;
+  padding: 10px;
+
+}
+
+.avaAndFollow {
+  grid-column: 1/2;
+  grid-row: 1/2;
+  display: grid;
+  grid-template-rows: 1fr 30px;
+  gap: 2px;
+}
+
+.ava img {
+  width: 100px;
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+.followButton {
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+
+.followButton button:hover {
+  border: 3px solid #363636;
+}
+
+
+.followButton button {
+  width: 80px;
+  height: 30px;
+  margin-left: 5px;
+  color: white;
+  font-weight: bold;
+  border: 1px solid darkgray;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.follow {
+  background: #915353;
+}
+
+.unfollow {
+  background: #4d5583;
+}
+
+.mainInfo {
+  grid-column: 2/3;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  border: 1px solid darkgray;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.name {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+.status {
+  grid-column: 1/4;
+  grid-row: 3/4;
+}
+
+.country {
+  grid-column: 4/5;
+  grid-row: 1/2;
+  text-align: right;
+}
+
+.city {
+  grid-column: 4/5;
+  grid-row: 3/4;
+  text-align: right;
+}

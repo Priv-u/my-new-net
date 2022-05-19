@@ -12,7 +12,7 @@
 .navBattons {
   display: grid;
   grid-template-columns: 10px 80px 10px;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 19fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 18fr;
   background-color: #493d38;
   padding: 12px 5px 0px 5px;
   font-weight: bold;
@@ -52,9 +52,14 @@
   grid-row: 4/5;
 }
 
+.findUsers {
+  grid-column: 2/3;
+  grid-row: 5/6;
+}
+
 .settings {
   grid-column: 2/3;
-  grid-row: 6/7;
+  grid-row: 7/8;
 }
 
 .active {
