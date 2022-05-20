@@ -1,3 +1,8 @@
+.usersWrapper {
+  height: 820px;
+  overflow-y: scroll
+}
+
 .user {
   display: grid;
   grid-template-columns: 100px 1fr 600px;
@@ -14,7 +19,7 @@
 }
 
 .ava img {
-  width: 100px;
+  width: 80px;
   grid-column: 1/2;
   grid-row: 1/2;
 }
