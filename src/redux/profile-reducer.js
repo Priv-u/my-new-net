@@ -1,13 +1,14 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST = 'UPDATE-NEW-POST';
+const ADD_LIKE_TO_POST = 'ADD-LIKE-TO-POST';
 
 let initialState = {
   posts: [
-    { id: 1, message: 'Первое сообщение', messageDate: '08/05/2022', likesCount: 10 },
-    { id: 2, message: 'Второе сообщение', messageDate: '08/05/2022', likesCount: 20 },
-    { id: 3, message: 'Третье сообщение', messageDate: '08/05/2022', likesCount: 30 },
-    { id: 4, message: 'Четвертое сообщение из внешнего массива данных', messageDate: '08/05/2022', likesCount: 40 },
-    { id: 5, message: "Lorem ipsum dolor sit amet consectetur \n adipisicing elit. Mollitia possimus quas atque exercitationem est hic cupiditate saepe ipsa maiores vero temporibus voluptas minima deleniti inventore quia ab tempore excepturi Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia possimus quas atque exercitationem est hic cupiditate saepe ipsa maiores vero temporibus voluptas minima deleniti inventore quia ab tempore excepturi Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia possimus quas atque exercitationem est hic cupiditate saepe ipsa maiores vero temporibus voluptas minima deleniti inventore quia ab tempore excepturi Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia possimus quas atque exercitationem est hic cupiditate saepe ipsa maiores vero temporibus voluptas minima deleniti inventore quia ab tempore excepturi", messageDate: '08/05/2022', likesCount: 40 }
+    { id: 1, message: 'Первое сообщение', messageDate: '08/05/2022', likesCount: 0 },
+    { id: 2, message: 'Второе сообщение', messageDate: '08/05/2022', likesCount: 0 },
+    { id: 3, message: 'Третье сообщение', messageDate: '08/05/2022', likesCount: 0 },
+    { id: 4, message: 'Четвертое сообщение из внешнего массива данных', messageDate: '08/05/2022', likesCount: 0 },
+    { id: 5, message: "Lorem ipsum dolor sit amet consectetur \n adipisicing elit. Mollitia possimus quas atque exercitationem est hic cupiditate saepe ipsa maiores vero temporibus voluptas minima deleniti inventore quia ab tempore excepturi Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia possimus quas atque exercitationem est hic cupiditate saepe ipsa maiores vero temporibus voluptas minima deleniti inventore quia ab tempore excepturi Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia possimus quas atque exercitationem est hic cupiditate saepe ipsa maiores vero temporibus voluptas minima deleniti inventore quia ab tempore excepturi Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia possimus quas atque exercitationem est hic cupiditate saepe ipsa maiores vero temporibus voluptas minima deleniti inventore quia ab tempore excepturi", messageDate: '08/05/2022', likesCount: 0 }
   ],
   newPost: ''
 }
@@ -51,6 +52,18 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         newPost: action.newText
       };
+    case ADD_LIKE_TO_POST:
+      return {
+        ...state,
+        posts: state.posts.map(p => {
+          debugger;
+          if (p.id === action.postId) {
+            let lCount = p.likesCount + 1;
+            return { ...p, likesCount: lCount }
+          }
+          return p;
+        })
+      }
 
     default:
       return state;
@@ -66,6 +79,13 @@ export const updateNewPostActionCreator = (text) => {
   return {
     type: UPDATE_NEW_POST,
     newText: text
+  }
+}
+
+export const addLikeAC = (postId) => {
+  return {
+    type: ADD_LIKE_TO_POST,
+    postId
   }
 }
 

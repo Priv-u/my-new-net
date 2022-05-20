@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { addPostActionCreator, updateNewPostActionCreator } from './../../redux/profile-reducer'
+import { addLikeAC, addPostActionCreator, updateNewPostActionCreator } from './../../redux/profile-reducer'
 import Profile from "./Profile";
 
 
@@ -17,10 +17,14 @@ let mapDispatchToProps = (dispatch) => {
 
     updateNewPostText: (text) => {
       dispatch(updateNewPostActionCreator(text))
+    },
+
+    addLike: (postId) => {
+      dispatch(addLikeAC(postId))
     }
 
   }
 }
-const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
 
-export default ProfileContainer;
+// export default ProfileContainer;

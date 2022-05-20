@@ -5,7 +5,13 @@ import s from './Profile.module.css';
 
 const Profile = (props) => {
   // debugger;
-  let postElements = props.posts.map((p) => <Post id={p.id} message={p.message} messageDate={p.messageDate} likesCount={p.likesCount} />);
+  let postElements = props.posts.map((p) => <Post
+    addLike={props.addLike}
+    key={p.id}
+    id={p.id}
+    message={p.message}
+    messageDate={p.messageDate}
+    likesCount={p.likesCount} />);
 
   let postElementsUi = postElements.reverse();
 
@@ -16,7 +22,6 @@ const Profile = (props) => {
   let onPostChange = (e) => {
     let text = e.currentTarget.value;
     props.updateNewPostText(text);
-
   }
 
   return (
@@ -33,6 +38,9 @@ const Profile = (props) => {
         </div>
       </div>
       <div className={s.posts}>
+
+
+
         {postElementsUi}
       </div>
 

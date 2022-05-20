@@ -7,10 +7,6 @@ import Dialogs from './components/Dialogs/Dialogs';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProfileContainer from './components/Profile/ProfileContainer';
 
-
-//TODO Пересмотреть урок 49 и 50 для понимания как создавать новую компоненту с редьюсором
-// основываясь на стэйте
-
 const App = (props) => {
   return (
     <BrowserRouter>

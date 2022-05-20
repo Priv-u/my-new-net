@@ -24,6 +24,21 @@ let Users = (props) => {
       id: 4, fotoUrl: 'https://mycomp.su/wp-content/uploads/zachem-nuzhen-avatar.jpg',
       followed: false, userName: 'Дима',
       status: 'Кто в армии служил, тот в цирке не смеется', location: { country: 'Казахстан', city: 'Алматы' }
+    },
+    {
+      id: 5, fotoUrl: 'https://mycomp.su/wp-content/uploads/zachem-nuzhen-avatar.jpg',
+      followed: false, userName: 'Илья',
+      status: 'Учусь, который год... ', location: { country: 'Россия', city: 'Москва' }
+    },
+    {
+      id: 6, fotoUrl: 'https://mycomp.su/wp-content/uploads/zachem-nuzhen-avatar.jpg',
+      followed: false, userName: 'Мария Юрьевна',
+      status: 'Опыт - дело нажвное! Его не пропьешь', location: { country: 'Казахстан', city: 'Алматы' }
+    },
+    {
+      id: 7, fotoUrl: 'https://mycomp.su/wp-content/uploads/zachem-nuzhen-avatar.jpg',
+      followed: false, userName: 'Азамат',
+      status: 'Хочу посмотреть весь мир', location: { country: 'Казахстан', city: 'Алматы' }
     }
   ]);
 

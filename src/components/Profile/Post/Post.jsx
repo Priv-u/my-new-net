@@ -3,7 +3,7 @@ import s from './Post.module.css';
 
 
 const Post = (props) => {
-
+  debugger;
 
   return (
     <div className={s.post}>
@@ -19,7 +19,7 @@ const Post = (props) => {
       <div className={s.date}>
         {props.messageDate}
       </div>
-      <div className={s.likes}>
+      <div className={s.likes} onClick={() => { props.addLike(props.id) }}>
         likes: {props.likesCount}
       </div>
 
