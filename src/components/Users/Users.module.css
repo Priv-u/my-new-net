@@ -1,6 +1,11 @@
 .usersWrapper {
   height: 820px;
-  overflow-y: scroll
+
+}
+
+.allUsers {
+  height: 750px;
+  overflow-y: scroll;
 }
 
 .user {
@@ -83,4 +88,16 @@
   grid-column: 4/5;
   grid-row: 3/4;
   text-align: right;
+}
+
+.paginator {
+  cursor: pointer;
+  margin: 15px;
+
+}
+
+.selectedPage {
+  font-weight: bold;
+  text-decoration: underline;
+  color: #915353;
 }
