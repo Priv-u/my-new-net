@@ -1,0 +1,14 @@
+.preLoader {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  top: calc(50% - 100px);
+}
+
+.preLoader img {
+  width: 200px;
+  height: 200px;
+}
