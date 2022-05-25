@@ -64,15 +64,16 @@ const usersReducer = (state = initialState, action) => {
 
     case PAGE_UP: {
       debugger;
-      if (action.currentPage < Math.ceil(state.totalUsersCount / state.pageSize) && action.currentPage <= state.startPageNumber + state.totalPagesCount - 1) {
+      if (action.newPage <= Math.ceil(state.totalUsersCount / state.pageSize) && action.newPage <= state.startPageNumber + state.totalPagesCount - 1) {
+        debugger;
         return {
           ...state,
-          currentPage: action.currentPage + 1,
+          currentPage: action.newPage
         }
-      } else if (action.currentPage < Math.ceil(state.totalUsersCount / state.pageSize)) {
+      } else if (action.newPage < Math.ceil(state.totalUsersCount / state.pageSize)) {
         return {
           ...state,
-          currentPage: action.currentPage + 1,
+          currentPage: action.newPage,
           startPageNumber: state.startPageNumber + 1
         }
       }
@@ -82,21 +83,20 @@ const usersReducer = (state = initialState, action) => {
 
 
     case PAGE_DOWN: {
-      if (state.startPageNumber >= 1 && state.startPageNumber < action.currentPage) {
+      if (action.newPage >= 1 && state.startPageNumber <= action.newPage) {
         return {
           ...state,
-          currentPage: state.currentPage - 1,
+          currentPage: action.newPage,
         }
-      } else if (state.startPageNumber > 1) {
+      } else if (state.startPageNumber > action.newPage) {
         return {
           ...state,
-          currentPage: state.currentPage - 1,
+          currentPage: action.newPage,
           startPageNumber: state.startPageNumber - 1
         }
       }
       return {
-        ...state,
-        currentPage: action.currentPage
+        ...state
       }
     }
     case SCREEN_DOWN: {
@@ -128,8 +128,8 @@ export const setUsers = (users) => ({ type: SET_USERS, users })
 export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage })
 export const setTotalUsersCount = (totalCount) => ({ type: SET_TOTAL_USERS_COUNT, totalCount })
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
-export const currentPageUp = (currentPage) => ({ type: PAGE_UP, currentPage })
-export const currentPageDown = (currentPage) => ({ type: PAGE_DOWN, currentPage })
+export const currentPageUp = (newPage) => ({ type: PAGE_UP, newPage })
+export const currentPageDown = (newPage) => ({ type: PAGE_DOWN, newPage })
 export const currentScreenDown = (newStartPage) => ({ type: SCREEN_DOWN, newStartPage })
 export const currentScreenUp = (newStartPage) => ({ type: SCREEN_UP, newStartPage })
 

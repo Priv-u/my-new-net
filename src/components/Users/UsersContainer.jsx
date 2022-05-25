@@ -2,7 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 
 import {
-  follow, setUsers, unfollow, setCurrentPage, setTotalUsersCount, toggleIsFetching, currentPageUp, currentPageDown, currentScreenDown, currentScreenUp
+  follow, setUsers, unfollow, setCurrentPage,
+  setTotalUsersCount, toggleIsFetching, currentPageUp,
+  currentPageDown, currentScreenDown, currentScreenUp
 } from "../../redux/users-reducer";
 
 import Users from "./Users";
@@ -32,11 +34,16 @@ class UsersContainer extends React.Component {
   }
 
   currentPageUp = (pageNumber) => {
-
-    this.props.currentPageUp(pageNumber);
+    let newPage;
+    if (pageNumber < Math.ceil(this.props.totalUsersCount / this.props.pageSize)) {
+      newPage = pageNumber + 1;
+    } else {
+      newPage = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+    }
     this.props.toggleIsFetching(true);
-    debugger;
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+    this.props.currentPageUp(newPage);
+    // debugger;
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${newPage}&count=${this.props.pageSize}`)
       .then(response => {
         this.props.toggleIsFetching(false);
         this.props.setUsers(response.data.items)
@@ -44,38 +51,46 @@ class UsersContainer extends React.Component {
   }
 
   currentPageDown = (pageNumber) => {
-    // debugger;
-    // if (this.props.currentPage > 1) {
+    let newPage;
+    debugger;
+    if (pageNumber > 1) {
+      newPage = pageNumber - 1
+    } else {
+      newPage = 1
+    }
     this.props.toggleIsFetching(true);
-    this.props.currentPageDown(pageNumber);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+    this.props.currentPageDown(newPage);
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${newPage}&count=${this.props.pageSize}`)
       .then(response => {
         this.props.toggleIsFetching(false);
         this.props.setUsers(response.data.items);
       })
-    // }
+
   }
   currentScreenDown = (pageNumber) => {
-
+    let newStartPage;
     if (pageNumber - this.props.totalPagesCount >= 1) {
+      newStartPage = pageNumber - this.props.totalPagesCount;
       debugger;
-      this.props.toggleIsFetching(true);
-      let newStartPage = pageNumber - this.props.totalPagesCount;
-      this.props.currentScreenDown(newStartPage);
-      axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${newStartPage}&count=${this.props.pageSize}`)
-        .then(response => {
-          this.props.toggleIsFetching(false);
-          this.props.setUsers(response.data.items);
-          // debugger;
-        })
+    } else {
+      newStartPage = 1;
     }
+
+    this.props.toggleIsFetching(true);
+    this.props.currentScreenDown(newStartPage);
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${newStartPage}&count=${this.props.pageSize}`)
+      .then(response => {
+        this.props.toggleIsFetching(false);
+        this.props.setUsers(response.data.items);
+        // debugger;
+      })
   }
 
   currentScreenUp = (pageNumber) => {
     debugger;
     let newStartPage;
     if (pageNumber + this.props.totalPagesCount <= Math.ceil(this.props.totalUsersCount / this.props.pageSize) - this.props.totalPagesCount) {
-      newStartPage = pageNumber + this.props.totalPagesCount;
+      newStartPage = this.props.startPageNumber + this.props.totalPagesCount - 1;
     }
     else {
       newStartPage = Math.ceil(this.props.totalUsersCount / this.props.pageSize) - this.props.totalPagesCount + 1;
@@ -90,7 +105,7 @@ class UsersContainer extends React.Component {
 
   }
 
-  // TODO Пофиксить работу пагинатора
+  // TODO Добавить возможность менять отображение пагинатора по данным из выпадающих списков
 
   render() {
     return <>
