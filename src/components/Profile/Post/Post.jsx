@@ -3,7 +3,7 @@ import s from './Post.module.css';
 
 
 const Post = (props) => {
-  debugger;
+  // debugger;
 
   return (
     <div className={s.post}>

@@ -1,16 +1,29 @@
 .usersWrapper {
   height: 820px;
+  display: grid;
+  grid-template-columns: 100px 1fr 400px;
+  grid-template-rows: 80px 100%;
+  padding: 10px;
 
+}
+
+.paginator {
+  cursor: pointer;
+  margin: 15px;
+  text-align: center;
+  grid-column: 2/3;
 }
 
 .allUsers {
   height: 750px;
   overflow-y: scroll;
+  grid-column: 1/3;
+  grid-row: 2/3;
 }
 
 .user {
   display: grid;
-  grid-template-columns: 100px 1fr 600px;
+  grid-template-columns: 100px 1fr;
   padding: 10px;
 
 }
@@ -90,14 +103,61 @@
   text-align: right;
 }
 
-.paginator {
-  cursor: pointer;
-  margin: 15px;
-
-}
-
 .selectedPage {
   font-weight: bold;
   text-decoration: underline;
   color: #915353;
+}
+
+.startPage::before {
+  content: ' \3C\3C ';
+}
+
+.pageDown::after {
+  content: ' \3C ';
+}
+
+.pageUp::before {
+  content: ' \3E ';
+}
+
+.endPage::before {
+  content: ' \3E\3E ';
+}
+
+.item {
+  color: #915353;
+  font-weight: bold;
+  border: 1px solid;
+  border-radius: 5px;
+  padding-left: 4px;
+  padding-bottom: 3px;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.item:hover {
+  background-color: #915353;
+  color: white;
+  font-weight: bold;
+}
+
+.pageNumber {
+  padding-left: 1px;
+  padding-bottom: 3px;
+  padding-right: 1px;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.pageNumber:hover {
+  background-color: #915353;
+  color: white;
+  border: 1px solid;
+  border-radius: 5px;
+  padding-left: 1px;
+  padding-bottom: 3px;
+  padding-right: 1px;
+  margin-left: 1px;
+  margin-right: 1px;
 }

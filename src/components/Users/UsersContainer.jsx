@@ -1,6 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { follow, setUsers, unfollow, setCurrentPage, setTotalUsersCount, toggleIsFetching } from "../../redux/users-reducer";
+
+import {
+  follow, setUsers, unfollow, setCurrentPage, setTotalUsersCount, toggleIsFetching, currentPageUp, currentPageDown, currentScreenDown, currentScreenUp
+} from "../../redux/users-reducer";
+
 import Users from "./Users";
 import * as axios from "axios";
 import Preloader from "../common/Preloader/Preloader";
@@ -27,11 +31,67 @@ class UsersContainer extends React.Component {
       });
   }
 
-  // TODO Переписать пегинатор таким образом, чтобы:
-  // 1) на странице отображался список не более, чем из 30 страниц
-  // 2) добавить кнопки "вперед" и "Назад"
-  // 3) добавить выподающий список для выбора количества отображаемых пользователей
-  // 4)
+  currentPageUp = (pageNumber) => {
+
+    this.props.currentPageUp(pageNumber);
+    this.props.toggleIsFetching(true);
+    debugger;
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+      .then(response => {
+        this.props.toggleIsFetching(false);
+        this.props.setUsers(response.data.items)
+      });
+  }
+
+  currentPageDown = (pageNumber) => {
+    // debugger;
+    // if (this.props.currentPage > 1) {
+    this.props.toggleIsFetching(true);
+    this.props.currentPageDown(pageNumber);
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+      .then(response => {
+        this.props.toggleIsFetching(false);
+        this.props.setUsers(response.data.items);
+      })
+    // }
+  }
+  currentScreenDown = (pageNumber) => {
+
+    if (pageNumber - this.props.totalPagesCount >= 1) {
+      debugger;
+      this.props.toggleIsFetching(true);
+      let newStartPage = pageNumber - this.props.totalPagesCount;
+      this.props.currentScreenDown(newStartPage);
+      axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${newStartPage}&count=${this.props.pageSize}`)
+        .then(response => {
+          this.props.toggleIsFetching(false);
+          this.props.setUsers(response.data.items);
+          // debugger;
+        })
+    }
+  }
+
+  currentScreenUp = (pageNumber) => {
+    debugger;
+    let newStartPage;
+    if (pageNumber + this.props.totalPagesCount <= Math.ceil(this.props.totalUsersCount / this.props.pageSize) - this.props.totalPagesCount) {
+      newStartPage = pageNumber + this.props.totalPagesCount;
+    }
+    else {
+      newStartPage = Math.ceil(this.props.totalUsersCount / this.props.pageSize) - this.props.totalPagesCount + 1;
+    }
+    this.props.toggleIsFetching(true);
+    this.props.currentScreenUp(newStartPage);
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${newStartPage}&count=${this.props.pageSize}`)
+      .then(response => {
+        this.props.toggleIsFetching(false);
+        this.props.setUsers(response.data.items);
+      })
+
+  }
+
+  // TODO Пофиксить работу пагинатора
+
   render() {
     return <>
       {this.props.isFetching ? <Preloader /> : null}
@@ -42,6 +102,15 @@ class UsersContainer extends React.Component {
         follow={this.props.follow}
         unfollow={this.props.unfollow}
         users={this.props.users}
+        totalPagesCount={this.props.totalPagesCount}
+        startPageNumber={this.props.startPageNumber}
+        onPageUp={this.currentPageUp}
+        onPageDown={this.currentPageDown}
+        onScreenDown={this.currentScreenDown}
+        onScreenUp={this.currentScreenUp}
+
+
+
       />
     </>
 
@@ -55,7 +124,10 @@ let mapStateToProps = (state) => {
     pageSize: state.usersPage.pageSize,
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
-    isFetching: state.usersPage.isFetching
+    isFetching: state.usersPage.isFetching,
+    totalPagesCount: state.usersPage.totalPagesCount,
+    startPageNumber: state.usersPage.startPageNumber
+
   }
 }
 
@@ -63,6 +135,6 @@ let mapStateToProps = (state) => {
 export default connect(mapStateToProps,
   {
     follow, unfollow, setUsers,
-    setCurrentPage, setTotalUsersCount, toggleIsFetching
+    setCurrentPage, setTotalUsersCount, toggleIsFetching, currentPageUp, currentPageDown, currentScreenUp, currentScreenDown
   }
 )(UsersContainer);

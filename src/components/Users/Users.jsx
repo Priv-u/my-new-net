@@ -5,18 +5,45 @@ import UserImage from './../../images/user.png'
 const Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
   let pages = [];
-  for (let i = 1; i <= pagesCount; i++) {
+  let pagesList = [];
+  for (let i = 0; i <= pagesCount - 1; i++) {
     pages.push(i);
   }
+  for (let i = props.startPageNumber; i <= (props.startPageNumber + props.totalPagesCount); i++) {
+    pagesList.push(i);
+  }
+  // debugger; 
 
   return <div className={s.usersWrapper}>
     <div className={s.paginator}>
-      <span> назад </span>
-      {pages.map(p => {
-        return <span className={props.currentPage === p && s.selectedPage}
-          onClick={(e) => { props.onPageChanged(p); }}> {p} </span>
+      <span onClick={(e) => { props.onScreenDown(props.currentPage) }} className={`${s.startPage} ${s.item}`}>  </span>
+      <span onClick={(e) => { props.onPageDown(props.currentPage) }} className={`${s.pageDown} ${s.item} `}>  </span>
+      {pagesList.map(p => {
+        return <span className={`${props.currentPage === p && s.selectedPage} ${s.pageNumber}`}
+          onClick={(e) => { props.onPageChanged(p); }}>{p}</span>
       })}
-      <span> вперед </span> <span> {pagesCount} </span>
+      <span onClick={(e) => { props.onPageUp(props.currentPage) }} className={`${s.pageUp} ${s.item}`}></span>
+      <span onClick={(e) => { props.onScreenUp(props.currentPage) }} className={`${s.endPage} ${s.item}`}></span>
+      <span>{pagesCount}</span>
+      <div>
+        <span>
+          <select>
+            <option value='5'>по 5 на лист</option>
+            <option value='15'>по 15 на лист</option>
+            <option value='30'>по 30 на лист</option>
+            <option value='50'>по 50 на лист</option>
+            <option value='100'>по 100 на лист</option>
+          </select>
+        </span>
+        <span>
+          <select>
+            <option value='30'>список из 30 страниц</option>
+            <option value='40'>список из 40 страниц</option>
+            <option value='50'>список из 50 страниц</option>
+          </select>
+        </span>
+
+      </div>
     </div>
     <div className={s.allUsers}>
       {
