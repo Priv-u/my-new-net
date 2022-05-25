@@ -6,10 +6,10 @@ const Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
   let pages = [];
   let pagesList = [];
-  for (let i = 0; i <= pagesCount - 1; i++) {
+  for (let i = 1; i <= pagesCount - 1; i++) {
     pages.push(i);
   }
-  for (let i = props.startPageNumber; i <= (props.startPageNumber + props.totalPagesCount); i++) {
+  for (let i = props.startPageNumber; i <= (props.startPageNumber + props.totalPagesCount - 1); i++) {
     pagesList.push(i);
   }
   // debugger; 
@@ -25,8 +25,8 @@ const Users = (props) => {
       <span onClick={(e) => { props.onPageUp(props.currentPage) }} className={`${s.pageUp} ${s.item}`}></span>
       <span onClick={(e) => { props.onScreenUp(props.currentPage) }} className={`${s.endPage} ${s.item}`}></span>
       <span>{pagesCount}</span>
-      <div>
-        <span>
+      <div className={s.lists}>
+        <span className={s.list1}>
           <select>
             <option value='5'>по 5 на лист</option>
             <option value='15'>по 15 на лист</option>
@@ -35,11 +35,11 @@ const Users = (props) => {
             <option value='100'>по 100 на лист</option>
           </select>
         </span>
-        <span>
+        <span className={s.list2}>
           <select>
+            <option value='10'>список из 10 страниц</option>
+            <option value='20'>список из 20 страниц</option>
             <option value='30'>список из 30 страниц</option>
-            <option value='40'>список из 40 страниц</option>
-            <option value='50'>список из 50 страниц</option>
           </select>
         </span>
 
