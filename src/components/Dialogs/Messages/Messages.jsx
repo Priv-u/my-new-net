@@ -5,18 +5,13 @@ import Message from "./Message/Message";
 
 const Messages = (props) => {
 
-  // TODO Такой вариант прокрутки на последний элемент не работает. Возможно в будущем
-  // нужно будет реализовать эту функцию в стэйте... 
-
   let addMessage = () => {
     props.addMessage();
-
   }
 
   let onMessageChange = (e) => {
     let text = e.currentTarget.value;
     props.updateNewMessageText(text);
-
   }
 
   let messageUi = props.messages.map(m => <Message
@@ -24,7 +19,6 @@ const Messages = (props) => {
     message={m.message}
     messageDate={m.messageDate}
     messageTime={m.messageTime} />);
-
   return (
     <div >
       <div className={s.messages}>

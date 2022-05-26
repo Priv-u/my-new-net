@@ -1,5 +1,5 @@
 import React from "react";
-import preLoader from './../../../assets/loader.svg';
+import preLoader from './../../../assets/preloader.svg';
 import s from './Preloader.module.css'
 
 

@@ -106,6 +106,7 @@ const usersReducer = (state = initialState, action) => {
         startPageNumber: action.newStartPage
       }
     }
+
     case SCREEN_UP: {
       return {
         ...state,

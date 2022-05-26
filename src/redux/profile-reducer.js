@@ -1,6 +1,7 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST = 'UPDATE-NEW-POST';
 const ADD_LIKE_TO_POST = 'ADD-LIKE-TO-POST';
+const SET_USER_PROFILE = 'SET-USER-PROFILE';
 
 let initialState = {
   posts: [
@@ -10,7 +11,8 @@ let initialState = {
     { id: 4, message: 'Четвертое сообщение из внешнего массива данных', messageDate: '08/05/2022', likesCount: 0 },
     { id: 5, message: "Lorem ipsum dolor sit amet consectetur \n adipisicing elit. Mollitia possimus quas atque exercitationem est hic cupiditate saepe ipsa maiores vero temporibus voluptas minima deleniti inventore quia ab tempore excepturi Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia possimus quas atque exercitationem est hic cupiditate saepe ipsa maiores vero temporibus voluptas minima deleniti inventore quia ab tempore excepturi Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia possimus quas atque exercitationem est hic cupiditate saepe ipsa maiores vero temporibus voluptas minima deleniti inventore quia ab tempore excepturi Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia possimus quas atque exercitationem est hic cupiditate saepe ipsa maiores vero temporibus voluptas minima deleniti inventore quia ab tempore excepturi", messageDate: '08/05/2022', likesCount: 0 }
   ],
-  newPost: ''
+  newPost: '',
+  profile: null
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -36,16 +38,11 @@ const profileReducer = (state = initialState, action) => {
         messageDate: String(now.day + '/' + now.month + '/' + now.year),
         likesCount: 0
       }
-
-      if (newPostText.message !== '') {
-
-        return {
-          ...state,
-          posts: [...state.posts, newPostText],
-          newPost: ''
-        }
+      return {
+        ...state,
+        posts: [...state.posts, newPostText],
+        newPost: ''
       }
-      break;
 
     case UPDATE_NEW_POST:
       return {
@@ -56,7 +53,7 @@ const profileReducer = (state = initialState, action) => {
       return {
         ...state,
         posts: state.posts.map(p => {
-          debugger;
+          // debugger;
           if (p.id === action.postId) {
             let lCount = p.likesCount + 1;
             return { ...p, likesCount: lCount }
@@ -65,28 +62,23 @@ const profileReducer = (state = initialState, action) => {
         })
       }
 
+    case SET_USER_PROFILE:
+      return {
+        ...state,
+        profile: action.profile
+      }
+
     default:
       return state;
   }
 
 }
 
-export const addPostActionCreator = () => {
-  return { type: ADD_POST }
-}
 
-export const updateNewPostActionCreator = (text) => {
-  return {
-    type: UPDATE_NEW_POST,
-    newText: text
-  }
-}
+export const addPost = (text) => ({ type: ADD_POST, text })
+export const updateNewPost = (newText) => ({ type: UPDATE_NEW_POST, newText })
+export const addLike = (postId) => ({ type: ADD_LIKE_TO_POST, postId })
+export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
 
-export const addLikeAC = (postId) => {
-  return {
-    type: ADD_LIKE_TO_POST,
-    postId
-  }
-}
 
 export default profileReducer;

@@ -1,10 +1,12 @@
 import React from "react";
+import Preloader from "../common/Preloader/Preloader";
 import Post from './Post/Post';
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import s from './Profile.module.css';
 
 
 const Profile = (props) => {
-  // debugger;
+  debugger;
   let postElements = props.posts.map((p) => <Post
     addLike={props.addLike}
     key={p.id}
@@ -21,14 +23,14 @@ const Profile = (props) => {
 
   let onPostChange = (e) => {
     let text = e.currentTarget.value;
-    props.updateNewPostText(text);
+    props.updateNewPost(text);
   }
-
+  if (!props.profile) {
+    return <Preloader />
+  }
   return (
     <div>
-      <div>
-        <img src={require('./../../images/mountains.jpg')} alt='Красивый пейзаж' />
-      </div>
+      <ProfileInfo profile={props.profile} />
 
       <div className={s.newMessage}>
         <textarea onChange={onPostChange} value={props.newPost} />
@@ -38,9 +40,6 @@ const Profile = (props) => {
         </div>
       </div>
       <div className={s.posts}>
-
-
-
         {postElementsUi}
       </div>
 

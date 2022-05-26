@@ -1,30 +1,37 @@
+import React from "react";
 import { connect } from "react-redux";
-import { addLikeAC, addPostActionCreator, updateNewPostActionCreator } from './../../redux/profile-reducer'
+import { addLike, addPost, updateNewPost, setUserProfile } from './../../redux/profile-reducer';
 import Profile from "./Profile";
+import * as axios from "axios";
 
 
-let mapStateToProps = (state) => {
-  return {
-    posts: state.profilePage.posts,
-    newPost: state.profilePage.newPost
+class ProfileContainer extends React.Component {
+
+  componentDidMount() {
+    debugger;
+    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+      .then(response => {
+        this.props.setUserProfile(response.data);
+      })
+  }
+
+  render() {
+    // debugger;
+    return (
+      <Profile {...this.props} profile={this.props.profile} />
+    )
   }
 }
-let mapDispatchToProps = (dispatch) => {
-  return {
-    addPost: () => {
-      dispatch(addPostActionCreator())
-    },
 
-    updateNewPostText: (text) => {
-      dispatch(updateNewPostActionCreator(text))
-    },
+let mapStateToProps = (state) => ({
+  posts: state.profilePage.posts,
+  newPost: state.profilePage.newPost,
+  profile: state.profilePage.profile
 
-    addLike: (postId) => {
-      dispatch(addLikeAC(postId))
-    }
+})
 
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps, { addPost, updateNewPost, addLike, setUserProfile })(ProfileContainer);
 
 // export default ProfileContainer;
+// TODO Дописать профайл контейнер так, чтобы можно было посмотреть фото пользователя. Т.е. сделать запрос на
+// сервер и получить с него данные пользователя.
