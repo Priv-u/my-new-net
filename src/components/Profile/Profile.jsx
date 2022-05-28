@@ -6,7 +6,6 @@ import s from './Profile.module.css';
 
 
 const Profile = (props) => {
-  debugger;
   let postElements = props.posts.map((p) => <Post
     addLike={props.addLike}
     key={p.id}
@@ -31,7 +30,6 @@ const Profile = (props) => {
   return (
     <div>
       <ProfileInfo profile={props.profile} />
-
       <div className={s.newMessage}>
         <textarea onChange={onPostChange} value={props.newPost} />
 

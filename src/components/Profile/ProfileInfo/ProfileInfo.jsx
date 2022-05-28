@@ -5,12 +5,12 @@ import profileImage from './../../../images/mountains.jpg'
 const ProfileInfo = (props) => {
   return (
     < div >
-      <div>
+      <div className={s.profileImage}>
         <img src={profileImage} alt='Красивый пейзаж' />
       </div>
       <div className={s.profileInfo}>
         <div className={s.ava}>
-          <img src={props.profile.photos.large} alt="" />
+          <img className={s.avaImg} src={props.profile.photos.large} alt="ФОТО ОТСУТСТВУЕТ" />
         </div>
         <div className={s.item}>
           Обо мне: {props.profile.aboutMe}

@@ -8,7 +8,7 @@
 
 .headerContent {
   display: grid;
-  grid-template-columns: 150px 1fr 150px;
+  grid-template-columns: 150px 1fr 200px;
   grid-template-rows: 20px 20px 20px;
   padding: 5px;
 }
@@ -30,9 +30,23 @@
 
 }
 
-.signIn {
+.loginBlock {
+  grid-column: 3/4;
+  grid-row: 2/3;
+}
+
+.login {
   grid-column: 3/4;
   grid-row: 2/3;
   font-weight: normal;
   cursor: pointer;
+  text-decoration: none;
+  color: white;
+  padding-right: 10px;
+  text-align: right;
+}
+
+.login:hover {
+  color: brown;
+
 }

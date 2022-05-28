@@ -16,7 +16,8 @@ class UsersContainer extends React.Component {
 
   componentDidMount() {
     this.props.toggleIsFetching(true);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
+      , { withCredentials: true })
       .then(response => {
         this.props.toggleIsFetching(false);
         this.props.setUsers(response.data.items);
@@ -26,7 +27,8 @@ class UsersContainer extends React.Component {
   onPageChanged = (pageNumber) => {
     this.props.toggleIsFetching(true);
     this.props.setCurrentPage(pageNumber);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`
+      , { withCredentials: true })
       .then(response => {
         this.props.toggleIsFetching(false);
         this.props.setUsers(response.data.items)
@@ -42,8 +44,9 @@ class UsersContainer extends React.Component {
     }
     this.props.toggleIsFetching(true);
     this.props.currentPageUp(newPage);
-    // debugger;
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${newPage}&count=${this.props.pageSize}`)
+
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${newPage}&count=${this.props.pageSize}`
+      , { withCredentials: true })
       .then(response => {
         this.props.toggleIsFetching(false);
         this.props.setUsers(response.data.items)
@@ -52,7 +55,7 @@ class UsersContainer extends React.Component {
 
   currentPageDown = (pageNumber) => {
     let newPage;
-    debugger;
+
     if (pageNumber > 1) {
       newPage = pageNumber - 1
     } else {
@@ -60,7 +63,8 @@ class UsersContainer extends React.Component {
     }
     this.props.toggleIsFetching(true);
     this.props.currentPageDown(newPage);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${newPage}&count=${this.props.pageSize}`)
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${newPage}&count=${this.props.pageSize}`
+      , { withCredentials: true })
       .then(response => {
         this.props.toggleIsFetching(false);
         this.props.setUsers(response.data.items);
@@ -71,23 +75,23 @@ class UsersContainer extends React.Component {
     let newStartPage;
     if (pageNumber - this.props.totalPagesCount >= 1) {
       newStartPage = pageNumber - this.props.totalPagesCount;
-      debugger;
+
     } else {
       newStartPage = 1;
     }
 
     this.props.toggleIsFetching(true);
     this.props.currentScreenDown(newStartPage);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${newStartPage}&count=${this.props.pageSize}`)
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${newStartPage}&count=${this.props.pageSize}`
+      , { withCredentials: true })
       .then(response => {
         this.props.toggleIsFetching(false);
         this.props.setUsers(response.data.items);
-        // debugger;
+
       })
   }
 
   currentScreenUp = (pageNumber) => {
-    debugger;
     let newStartPage;
     if (pageNumber + this.props.totalPagesCount <= Math.ceil(this.props.totalUsersCount / this.props.pageSize) - this.props.totalPagesCount) {
       newStartPage = this.props.startPageNumber + this.props.totalPagesCount - 1;
@@ -97,7 +101,8 @@ class UsersContainer extends React.Component {
     }
     this.props.toggleIsFetching(true);
     this.props.currentScreenUp(newStartPage);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${newStartPage}&count=${this.props.pageSize}`)
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${newStartPage}&count=${this.props.pageSize}`
+      , { withCredentials: true })
       .then(response => {
         this.props.toggleIsFetching(false);
         this.props.setUsers(response.data.items);
@@ -122,9 +127,6 @@ class UsersContainer extends React.Component {
         onPageDown={this.currentPageDown}
         onScreenDown={this.currentScreenDown}
         onScreenUp={this.currentScreenUp}
-
-
-
       />
     </>
 
