@@ -1,38 +1,32 @@
 import React from "react";
 import { connect } from "react-redux";
-
 import {
   follow, setUsers, unfollow, setCurrentPage,
   setTotalUsersCount, toggleIsFetching, currentPageUp,
   currentPageDown, currentScreenDown, currentScreenUp
 } from "../../redux/users-reducer";
-
 import Users from "./Users";
-import * as axios from "axios";
 import Preloader from "../common/Preloader/Preloader";
-
+import { usersAPI } from './../../api/api';
 
 class UsersContainer extends React.Component {
 
   componentDidMount() {
     this.props.toggleIsFetching(true);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
-      , { withCredentials: true })
-      .then(response => {
-        this.props.toggleIsFetching(false);
-        this.props.setUsers(response.data.items);
-        this.props.setTotalUsersCount(response.data.totalCount);
-      });
+
+    usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+      this.props.toggleIsFetching(false);
+      this.props.setUsers(data.items);
+      this.props.setTotalUsersCount(data.totalCount);
+    });
   }
   onPageChanged = (pageNumber) => {
     this.props.toggleIsFetching(true);
     this.props.setCurrentPage(pageNumber);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`
-      , { withCredentials: true })
-      .then(response => {
-        this.props.toggleIsFetching(false);
-        this.props.setUsers(response.data.items)
-      });
+    usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
+      this.props.toggleIsFetching(false);
+      this.props.setUsers(data.items)
+    });
   }
 
   currentPageUp = (pageNumber) => {
@@ -45,12 +39,10 @@ class UsersContainer extends React.Component {
     this.props.toggleIsFetching(true);
     this.props.currentPageUp(newPage);
 
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${newPage}&count=${this.props.pageSize}`
-      , { withCredentials: true })
-      .then(response => {
-        this.props.toggleIsFetching(false);
-        this.props.setUsers(response.data.items)
-      });
+    usersAPI.getUsers(newPage, this.props.pageSize).then(data => {
+      this.props.toggleIsFetching(false);
+      this.props.setUsers(data.items)
+    });
   }
 
   currentPageDown = (pageNumber) => {
@@ -63,12 +55,10 @@ class UsersContainer extends React.Component {
     }
     this.props.toggleIsFetching(true);
     this.props.currentPageDown(newPage);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${newPage}&count=${this.props.pageSize}`
-      , { withCredentials: true })
-      .then(response => {
-        this.props.toggleIsFetching(false);
-        this.props.setUsers(response.data.items);
-      })
+    usersAPI.getUsers(newPage, this.props.pageSize).then(data => {
+      this.props.toggleIsFetching(false);
+      this.props.setUsers(data.items);
+    })
 
   }
   currentScreenDown = (pageNumber) => {
@@ -82,13 +72,11 @@ class UsersContainer extends React.Component {
 
     this.props.toggleIsFetching(true);
     this.props.currentScreenDown(newStartPage);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${newStartPage}&count=${this.props.pageSize}`
-      , { withCredentials: true })
-      .then(response => {
-        this.props.toggleIsFetching(false);
-        this.props.setUsers(response.data.items);
+    usersAPI.getUsers(newStartPage, this.props.pageSize).then(data => {
+      this.props.toggleIsFetching(false);
+      this.props.setUsers(data.items);
 
-      })
+    })
   }
 
   currentScreenUp = (pageNumber) => {
@@ -101,12 +89,10 @@ class UsersContainer extends React.Component {
     }
     this.props.toggleIsFetching(true);
     this.props.currentScreenUp(newStartPage);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${newStartPage}&count=${this.props.pageSize}`
-      , { withCredentials: true })
-      .then(response => {
-        this.props.toggleIsFetching(false);
-        this.props.setUsers(response.data.items);
-      })
+    usersAPI.getUsers(newStartPage, this.props.pageSize).then(data => {
+      this.props.toggleIsFetching(false);
+      this.props.setUsers(data.items);
+    })
   }
 
   // TODO Добавить возможность менять отображение пагинатора по данным из выпадающих списков
