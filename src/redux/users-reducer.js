@@ -8,6 +8,7 @@ const PAGE_UP = 'PAGE-UP';
 const PAGE_DOWN = 'PAGE-DOWN';
 const SCREEN_DOWN = 'SCREEN-DOWN';
 const SCREEN_UP = 'SCREEN-UP';
+const TOGGLE_IS_FOLOWING_PROGRESS = 'TOGGLE-IS-FOLOWING-PROGRESS'
 
 let initialState = {
   users: [],
@@ -16,7 +17,8 @@ let initialState = {
   currentPage: 1,
   isFetching: false,
   totalPagesCount: 30,
-  startPageNumber: 1
+  startPageNumber: 1,
+  folowingInProgress: []
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -81,7 +83,6 @@ const usersReducer = (state = initialState, action) => {
       return { ...state }
     }
 
-
     case PAGE_DOWN: {
       if (action.newPage >= 1 && state.startPageNumber <= action.newPage) {
         return {
@@ -114,6 +115,17 @@ const usersReducer = (state = initialState, action) => {
         startPageNumber: action.newStartPage
       }
     }
+    case TOGGLE_IS_FOLOWING_PROGRESS: {
+      // debugger;
+      return {
+        ...state,
+        folowingInProgress: action.isFetching
+          // добавляем пользователя в массив и храним его там до тех пор, пока не получим ответ от сервера
+          ? [...state.folowingInProgress, action.userId]
+          // если пользователь с массиве есть, то удаляем его после получения ответа от сервера
+          : state.folowingInProgress.filter(id => id !== action.userId)
+      }
+    }
 
 
 
@@ -133,5 +145,6 @@ export const currentPageUp = (newPage) => ({ type: PAGE_UP, newPage })
 export const currentPageDown = (newPage) => ({ type: PAGE_DOWN, newPage })
 export const currentScreenDown = (newStartPage) => ({ type: SCREEN_DOWN, newStartPage })
 export const currentScreenUp = (newStartPage) => ({ type: SCREEN_UP, newStartPage })
+export const toggleFollowingProgress = (isFetching, userId) => ({ type: TOGGLE_IS_FOLOWING_PROGRESS, isFetching, userId })
 
 export default usersReducer;

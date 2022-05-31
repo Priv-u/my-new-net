@@ -1,10 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
-  follow, setUsers, unfollow, setCurrentPage,
-  setTotalUsersCount, toggleIsFetching, currentPageUp,
-  currentPageDown, currentScreenDown, currentScreenUp
+  follow,
+  setUsers,
+  unfollow,
+  setCurrentPage,
+  setTotalUsersCount,
+  toggleIsFetching,
+  currentPageUp,
+  currentPageDown,
+  currentScreenDown,
+  currentScreenUp,
+  toggleFollowingProgress
 } from "../../redux/users-reducer";
+
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 import { usersAPI } from './../../api/api';
@@ -113,6 +122,8 @@ class UsersContainer extends React.Component {
         onPageDown={this.currentPageDown}
         onScreenDown={this.currentScreenDown}
         onScreenUp={this.currentScreenUp}
+        toggleFollowingProgress={this.props.toggleFollowingProgress}
+        folowingInProgress={this.props.folowingInProgress}
       />
     </>
 
@@ -128,7 +139,10 @@ let mapStateToProps = (state) => {
     currentPage: state.usersPage.currentPage,
     isFetching: state.usersPage.isFetching,
     totalPagesCount: state.usersPage.totalPagesCount,
-    startPageNumber: state.usersPage.startPageNumber
+    startPageNumber: state.usersPage.startPageNumber,
+    folowingInProgress: state.usersPage.folowingInProgress
+
+
 
   }
 }
@@ -136,7 +150,16 @@ let mapStateToProps = (state) => {
 
 export default connect(mapStateToProps,
   {
-    follow, unfollow, setUsers,
-    setCurrentPage, setTotalUsersCount, toggleIsFetching, currentPageUp, currentPageDown, currentScreenUp, currentScreenDown
+    follow,
+    unfollow,
+    setUsers,
+    setCurrentPage,
+    setTotalUsersCount,
+    toggleIsFetching,
+    currentPageUp,
+    currentPageDown,
+    currentScreenUp,
+    currentScreenDown,
+    toggleFollowingProgress
   }
 )(UsersContainer);

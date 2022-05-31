@@ -67,8 +67,30 @@
   background: #915353;
 }
 
+.follow:disabled {
+  background: #a7a4a4;
+  border-color: #a7a4a4;
+}
+
+.follow:disabled:hover {
+  background: #a7a4a4;
+  border-color: #a7a4a4;
+}
+
+
+
 .unfollow {
   background: #4d5583;
+}
+
+.unfollow:disabled {
+  background: #a7a4a4;
+  border-color: #a7a4a4;
+}
+
+.unfollow:disabled:hover {
+  background: #a7a4a4;
+  border-color: #a7a4a4;
 }
 
 .mainInfo {
