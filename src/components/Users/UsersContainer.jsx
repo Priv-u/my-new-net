@@ -2,106 +2,46 @@ import React from "react";
 import { connect } from "react-redux";
 import {
   follow,
-  setUsers,
   unfollow,
-  setCurrentPage,
-  setTotalUsersCount,
   toggleIsFetching,
-  currentPageUp,
-  currentPageDown,
-  currentScreenDown,
-  currentScreenUp,
-  toggleFollowingProgress
+  toggleFollowingProgress,
+  // ***** Санки *****
+  getUsers,
+  setPage,
+  pageUp,
+  pageDown,
+  screenDown,
+  screenUp,
 } from "../../redux/users-reducer";
 
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import { usersAPI } from './../../api/api';
+// import { usersAPI } from './../../api/api';
 
 class UsersContainer extends React.Component {
 
   componentDidMount() {
-    this.props.toggleIsFetching(true);
-
-    usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-      this.props.toggleIsFetching(false);
-      this.props.setUsers(data.items);
-      this.props.setTotalUsersCount(data.totalCount);
-    });
+    this.props.getUsers(this.props.currentPage, this.props.pageSize);
   }
+
   onPageChanged = (pageNumber) => {
-    this.props.toggleIsFetching(true);
-    this.props.setCurrentPage(pageNumber);
-    usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
-      this.props.toggleIsFetching(false);
-      this.props.setUsers(data.items)
-    });
+    this.props.setPage(pageNumber, this.props.pageSize);
   }
 
   currentPageUp = (pageNumber) => {
-    let newPage;
-    if (pageNumber < Math.ceil(this.props.totalUsersCount / this.props.pageSize)) {
-      newPage = pageNumber + 1;
-    } else {
-      newPage = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
-    }
-    this.props.toggleIsFetching(true);
-    this.props.currentPageUp(newPage);
-
-    usersAPI.getUsers(newPage, this.props.pageSize).then(data => {
-      this.props.toggleIsFetching(false);
-      this.props.setUsers(data.items)
-    });
+    this.props.pageUp(pageNumber, this.props.totalUsersCount, this.props.pageSize);
   }
 
   currentPageDown = (pageNumber) => {
-    let newPage;
-
-    if (pageNumber > 1) {
-      newPage = pageNumber - 1
-    } else {
-      newPage = 1
-    }
-    this.props.toggleIsFetching(true);
-    this.props.currentPageDown(newPage);
-    usersAPI.getUsers(newPage, this.props.pageSize).then(data => {
-      this.props.toggleIsFetching(false);
-      this.props.setUsers(data.items);
-    })
-
+    this.props.pageDown(pageNumber, this.props.pageSize);
   }
+
   currentScreenDown = (pageNumber) => {
-    let newStartPage;
-    if (pageNumber - this.props.totalPagesCount >= 1) {
-      newStartPage = pageNumber - this.props.totalPagesCount;
-
-    } else {
-      newStartPage = 1;
-    }
-
-    this.props.toggleIsFetching(true);
-    this.props.currentScreenDown(newStartPage);
-    usersAPI.getUsers(newStartPage, this.props.pageSize).then(data => {
-      this.props.toggleIsFetching(false);
-      this.props.setUsers(data.items);
-
-    })
+    this.props.screenDown(pageNumber, this.props.totalPagesCount, this.props.pageSize)
   }
 
   currentScreenUp = (pageNumber) => {
-    let newStartPage;
-    if (pageNumber + this.props.totalPagesCount <= Math.ceil(this.props.totalUsersCount / this.props.pageSize) - this.props.totalPagesCount) {
-      newStartPage = this.props.startPageNumber + this.props.totalPagesCount - 1;
-    }
-    else {
-      newStartPage = Math.ceil(this.props.totalUsersCount / this.props.pageSize) - this.props.totalPagesCount + 1;
-    }
-    this.props.toggleIsFetching(true);
-    this.props.currentScreenUp(newStartPage);
-    usersAPI.getUsers(newStartPage, this.props.pageSize).then(data => {
-      this.props.toggleIsFetching(false);
-      this.props.setUsers(data.items);
-    })
+    this.props.screenUp(pageNumber, this.props.totalPagesCount, this.props.totalUsersCount, this.props.startPageNumber, this.props.pageSize);
   }
 
   // TODO Добавить возможность менять отображение пагинатора по данным из выпадающих списков
@@ -112,22 +52,20 @@ class UsersContainer extends React.Component {
       <Users totalUsersCount={this.props.totalUsersCount}
         pageSize={this.props.pageSize}
         currentPage={this.props.currentPage}
-        onPageChanged={this.onPageChanged}
         follow={this.props.follow}
         unfollow={this.props.unfollow}
         users={this.props.users}
         totalPagesCount={this.props.totalPagesCount}
         startPageNumber={this.props.startPageNumber}
+        toggleFollowingProgress={this.props.toggleFollowingProgress}
+        folowingInProgress={this.props.folowingInProgress}
+        onPageChanged={this.onPageChanged}
         onPageUp={this.currentPageUp}
         onPageDown={this.currentPageDown}
         onScreenDown={this.currentScreenDown}
         onScreenUp={this.currentScreenUp}
-        toggleFollowingProgress={this.props.toggleFollowingProgress}
-        folowingInProgress={this.props.folowingInProgress}
       />
     </>
-
-
   };
 }
 
@@ -141,25 +79,21 @@ let mapStateToProps = (state) => {
     totalPagesCount: state.usersPage.totalPagesCount,
     startPageNumber: state.usersPage.startPageNumber,
     folowingInProgress: state.usersPage.folowingInProgress
-
-
-
   }
 }
-
 
 export default connect(mapStateToProps,
   {
     follow,
     unfollow,
-    setUsers,
-    setCurrentPage,
-    setTotalUsersCount,
     toggleIsFetching,
-    currentPageUp,
-    currentPageDown,
-    currentScreenUp,
-    currentScreenDown,
-    toggleFollowingProgress
+    toggleFollowingProgress,
+    // ***** Санки *****
+    getUsers,
+    setPage,
+    pageUp,
+    pageDown,
+    screenDown,
+    screenUp,
   }
 )(UsersContainer);

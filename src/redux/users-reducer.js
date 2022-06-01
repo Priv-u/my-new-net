@@ -1,3 +1,5 @@
+import { usersAPI } from "../api/api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
@@ -146,5 +148,99 @@ export const currentPageDown = (newPage) => ({ type: PAGE_DOWN, newPage })
 export const currentScreenDown = (newStartPage) => ({ type: SCREEN_DOWN, newStartPage })
 export const currentScreenUp = (newStartPage) => ({ type: SCREEN_UP, newStartPage })
 export const toggleFollowingProgress = (isFetching, userId) => ({ type: TOGGLE_IS_FOLOWING_PROGRESS, isFetching, userId })
+
+
+// ************************  Санки )) *****************************
+
+export const getUsers = (currentPage, pageSize) => {
+  return (dispatch) => {
+    dispatch(toggleIsFetching(true));
+    usersAPI.getUsers(currentPage, pageSize).then(data => {
+      dispatch(toggleIsFetching(false));
+      dispatch(setUsers(data.items));
+      dispatch(setTotalUsersCount(data.totalCount));
+    })
+  }
+}
+
+export const setPage = (pageNumber, pageSize) => {
+  return (dispatch) => {
+    dispatch(toggleIsFetching(true));
+    dispatch(setCurrentPage(pageNumber));
+    usersAPI.getUsers(pageNumber, pageSize).then(data => {
+      dispatch(toggleIsFetching(false));
+      dispatch(setUsers(data.items));
+    })
+  }
+}
+
+export const pageUp = (pageNumber, totalUsersCount, pageSize) => {
+  return (dispatch) => {
+    let newPage;
+    if (pageNumber < Math.ceil(totalUsersCount / pageSize)) {
+      newPage = pageNumber + 1;
+    } else {
+      newPage = Math.ceil(totalUsersCount / pageSize)
+    }
+    dispatch(toggleIsFetching(true));
+    dispatch(currentPageUp(newPage));
+    usersAPI.getUsers(newPage, pageSize).then(data => {
+      dispatch(toggleIsFetching(false));
+      dispatch(setUsers(data.items));
+    })
+  }
+}
+
+export const pageDown = (pageNumber, pageSize) => {
+  return (dispatch) => {
+    let newPage;
+    if (pageNumber > 1) {
+      newPage = pageNumber - 1
+    } else {
+      newPage = 1
+    }
+    dispatch(toggleIsFetching(true));
+    dispatch(currentPageDown(newPage));
+    usersAPI.getUsers(newPage, pageSize).then(data => {
+      dispatch(toggleIsFetching(false));
+      dispatch(setUsers(data.items));
+    })
+  }
+}
+
+export const screenDown = (pageNumber, totalPagesCount, pageSize) => {
+  return (dispatch) => {
+    let newStartPage;
+    if (pageNumber - totalPagesCount >= 1) {
+      newStartPage = pageNumber - totalPagesCount;
+    } else {
+      newStartPage = 1;
+    }
+    dispatch(toggleIsFetching(true));
+    dispatch(currentScreenDown(newStartPage));
+    usersAPI.getUsers(newStartPage, pageSize).then(data => {
+      dispatch(toggleIsFetching(false));
+      dispatch(setUsers(data.items));
+    })
+  }
+}
+
+export const screenUp = (pageNumber, totalPagesCount, totalUsersCount, startPageNumber, pageSize) => {
+  return (dispatch) => {
+    let newStartPage;
+    if (pageNumber + totalPagesCount <= Math.ceil(totalUsersCount / pageSize) - totalPagesCount) {
+      newStartPage = startPageNumber + totalPagesCount - 1;
+    }
+    else {
+      newStartPage = Math.ceil(totalUsersCount / pageSize) - totalPagesCount + 1;
+    }
+    dispatch(toggleIsFetching(true));
+    dispatch(currentScreenUp(newStartPage));
+    usersAPI.getUsers(newStartPage, pageSize).then(data => {
+      dispatch(toggleIsFetching(false));
+      dispatch(setUsers(data.items));
+    })
+  }
+}
 
 export default usersReducer;
