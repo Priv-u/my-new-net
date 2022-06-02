@@ -5,6 +5,7 @@ import Profile from "./Profile";
 // import * as axios from "axios";
 import { withRouter } from './../common/withRouter';
 import { profileAPI } from './../../api/api';
+import { Navigate } from 'react-router-dom'
 
 
 class ProfileContainer extends React.Component {
@@ -25,6 +26,9 @@ class ProfileContainer extends React.Component {
   }
 
   render() {
+    if (this.props.isAuth == false) {
+      return <Navigate to={'/login'} />
+    }
     return (
       <Profile {...this.props} profile={this.props.profile} />
     )
@@ -36,7 +40,8 @@ let mapStateToProps = (state) => (
     posts: state.profilePage.posts,
     newPost: state.profilePage.newPost,
     profile: state.profilePage.profile,
-    myId: state.auth.id
+    myId: state.auth.id,
+    isAuth: state.auth.isAuth
 
   }
 )

@@ -6,6 +6,7 @@ import Dialogs from './components/Dialogs/Dialogs';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
+import Login from './components/Login/Login';
 
 const App = (props) => {
   return (
@@ -15,6 +16,7 @@ const App = (props) => {
         <Navbar />
         <div class='app-wrapper-contetnt'>
           <Routes>
+            <Route path='/login' element={<Login />} />
             <Route path='/profile/:userId' element={<ProfileContainer />} />
             <Route path='/profile' element={<ProfileContainer />} />
             <Route path='/dialogs' element={<Dialogs />} />
