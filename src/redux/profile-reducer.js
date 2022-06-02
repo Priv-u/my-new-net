@@ -6,10 +6,8 @@ const SET_USER_PROFILE = 'SET-USER-PROFILE';
 let initialState = {
   posts: [
     { id: 1, message: 'Первое сообщение', messageDate: '08/05/2022', likesCount: 0 },
-    { id: 2, message: 'Второе сообщение', messageDate: '08/05/2022', likesCount: 0 },
-    { id: 3, message: 'Третье сообщение', messageDate: '08/05/2022', likesCount: 0 },
-    { id: 4, message: 'Четвертое сообщение из внешнего массива данных', messageDate: '08/05/2022', likesCount: 0 },
-    { id: 5, message: "Lorem ipsum dolor sit amet consectetur \n adipisicing elit. Mollitia possimus quas atque exercitationem est hic cupiditate saepe ipsa maiores vero temporibus voluptas minima deleniti inventore quia ab tempore excepturi Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia possimus quas atque exercitationem est hic cupiditate saepe ipsa maiores vero temporibus voluptas minima deleniti inventore quia ab tempore excepturi Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia possimus quas atque exercitationem est hic cupiditate saepe ipsa maiores vero temporibus voluptas minima deleniti inventore quia ab tempore excepturi Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia possimus quas atque exercitationem est hic cupiditate saepe ipsa maiores vero temporibus voluptas minima deleniti inventore quia ab tempore excepturi", messageDate: '08/05/2022', likesCount: 0 }
+    { id: 2, message: 'Второе сообщение', messageDate: '08/05/2022', likesCount: 0 }
+
   ],
   newPost: '',
   profile: null

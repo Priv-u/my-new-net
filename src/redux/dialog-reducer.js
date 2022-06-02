@@ -14,13 +14,8 @@ let initialState = {
   messages:
     [
       { id: 1, message: 'Первое сообщение', messageDate: '10/05/2022', messageTime: '08:10' },
-      { id: 2, message: 'Второе сообщение', messageDate: '10/05/2022', messageTime: '08:12' },
-      { id: 3, message: 'Третье сообщение', messageDate: '10/05/2022', messageTime: '08:14' },
-      { id: 4, message: 'Четвертое сообщение', messageDate: '10/05/2022', messageTime: '08:15' },
-      { id: 5, message: 'Пятое сообщение', messageDate: '10/05/2022', messageTime: '08:15' },
-      { id: 6, message: 'Шестое сообщение', messageDate: '10/05/2022', messageTime: '08:16' },
-      { id: 7, message: 'Седьмое сообщение', messageDate: '10/05/2022', messageTime: '08:19' },
-      { id: 8, message: 'Первое сообщение из внешнего блока данных', messageDate: '10/05/2022', messageTime: '08:19' }
+      { id: 2, message: 'Второе сообщение', messageDate: '10/05/2022', messageTime: '08:12' }
+
     ],
   newMessage: ''
 }
