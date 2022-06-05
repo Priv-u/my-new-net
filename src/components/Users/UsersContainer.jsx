@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
-  follow,
-  unfollow,
   toggleIsFetching,
   toggleFollowingProgress,
   // ***** Санки *****
+  follow,
+  unfollow,
   getUsers,
   setPage,
   pageUp,

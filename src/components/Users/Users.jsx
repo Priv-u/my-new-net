@@ -2,7 +2,7 @@ import React from "react";
 import s from './Users.module.css';
 import UserImage from './../../images/user.png';
 import { NavLink } from "react-router-dom";
-import { followAPI } from "../../api/api";
+
 
 const Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -14,7 +14,8 @@ const Users = (props) => {
   for (let i = props.startPageNumber; i <= (props.startPageNumber + props.totalPagesCount - 1); i++) {
     pagesList.push(i);
   }
-
+  // TODO Всё что выше вынести в санку (возможно)
+  // TODO Добавить возможность менять селекты из стэйта, а также менять отображение пагинатора через селекты
   return <div className={s.usersWrapper}>
     <div className={s.paginator}>
       <span onClick={(e) => { props.onScreenDown(props.currentPage) }} className={`${s.startPage} ${s.item}`}>  </span>
@@ -54,15 +55,12 @@ const Users = (props) => {
               <NavLink to={'/profile/' + u.id}>
                 <img src={u.photos.small != null ? u.photos.small : UserImage} alt='фото' />
               </NavLink>
-
             </div>
-
             <div className={s.followButton}>
               {u.followed ?
                 <button className={s.follow} disabled={props.folowingInProgress.some(id => id === u.id)} onClick={() => {
                   props.unfollow(u.id);
                 }}
-
                 > Unfollow</button> :
                 <button className={s.unfollow} disabled={props.folowingInProgress.some(id => id === u.id)} onClick={() => {
                   props.follow(u.id);

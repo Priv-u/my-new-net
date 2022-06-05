@@ -1,7 +1,7 @@
 import React from "react";
 import s from './Messages.module.css'
 import Message from "./Message/Message";
-import { Navigate } from "react-router-dom";
+// import { Navigate } from "react-router-dom";
 
 
 const Messages = (props) => {
@@ -20,9 +20,10 @@ const Messages = (props) => {
     message={m.message}
     messageDate={m.messageDate}
     messageTime={m.messageTime} />);
-  if (props.isAuth === false) {
-    return <Navigate to={'/login'} />
-  }
+
+  // if (!props.isAuth) {
+  //   return <Navigate to={'/login'} />
+  // }
   return (
     <div >
       <div className={s.messages}>
