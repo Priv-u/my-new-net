@@ -1,17 +1,24 @@
 import React from "react";
 import s from './../ProfileInfo/ProfileInfo.module.css';
-import profileImage from './../../../images/mountains.jpg';
+// import profileImage from './../../../images/mountains.jpg';
 import noPhoto from './../../../images/user.png';
+import ProfileStatus from "./ProfileStatus/ProfileStatus";
+
 
 const ProfileInfo = (props) => {
+
+
   return (
     < div >
-      <div className={s.profileImage}>
+      {/* <div className={s.profileImage}>
         <img src={profileImage} alt='Красивый пейзаж' />
-      </div>
+      </div> */}
       <div className={s.profileInfo}>
         <div className={s.ava}>
           <img className={s.avaImg} src={!props.profile.photos.large ? noPhoto : props.profile.photos.large} alt="ФОТО ОТСУТСТВУЕТ" />
+        </div>
+        <div className={s.status}>
+          <ProfileStatus status={"Не делайте мне нервы, их еще есть кому испортить... "} />
         </div>
         <div className={s.item}>
           Обо мне: {props.profile.aboutMe}

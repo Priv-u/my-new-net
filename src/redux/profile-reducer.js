@@ -53,7 +53,6 @@ const profileReducer = (state = initialState, action) => {
       return {
         ...state,
         posts: state.posts.map(p => {
-          // debugger;
           if (p.id === action.postId) {
             let lCount = p.likesCount + 1;
             return { ...p, likesCount: lCount }
@@ -85,7 +84,6 @@ export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
 export const setMyProfile = (myUserId, paramsUserId) => {
   return (dispatch) => {
     let userId = paramsUserId;
-    debugger;
     if (!userId && !myUserId) {
       userId = 2;
     } else if (!paramsUserId) {
@@ -97,6 +95,5 @@ export const setMyProfile = (myUserId, paramsUserId) => {
     })
   }
 }
-
 
 export default profileReducer;

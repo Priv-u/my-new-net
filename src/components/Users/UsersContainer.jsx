@@ -1,21 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
-  follow,
-  unfollow,
-  toggleIsFetching,
-  toggleFollowingProgress,
+  follow, unfollow, toggleIsFetching, toggleFollowingProgress,
   // ***** Санки *****
-  getUsers,
-  setPage,
-  pageUp,
-  pageDown,
-  screenDown,
-  screenUp,
+  getUsers, setPage, pageUp, pageDown, screenDown, screenUp,
 } from "../../redux/users-reducer";
 
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
+import { compose } from "redux";
 
 class UsersContainer extends React.Component {
 
@@ -81,18 +74,8 @@ let mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps,
-  {
-    follow,
-    unfollow,
-    toggleIsFetching,
-    toggleFollowingProgress,
-    // ***** Санки *****
-    getUsers,
-    setPage,
-    pageUp,
-    pageDown,
-    screenDown,
-    screenUp,
-  }
+export default compose(
+  connect(mapStateToProps, { follow, unfollow, toggleIsFetching, toggleFollowingProgress, getUsers, setPage, pageUp, pageDown, screenDown, screenUp }),
+
 )(UsersContainer);
+

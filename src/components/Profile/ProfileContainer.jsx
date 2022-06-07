@@ -4,15 +4,14 @@ import { addLike, addPost, updateNewPost, setUserProfile, setMyProfile } from '.
 import Profile from "./Profile";
 import { withRouter } from './../common/withRouter';
 import { withAuthNavigate } from "../../hoc/withAuthNavigate";
+import { compose } from "redux";
 
 
 
 class ProfileContainer extends React.Component {
 
   componentDidMount() {
-
     this.props.setMyProfile(this.props.myId, this.props.router.params.userId);
-
   }
 
   render() {
@@ -30,6 +29,9 @@ let mapStateToProps = (state) => (
     myId: state.auth.id,
   }
 )
-let withAuthNavigateContainer = withAuthNavigate(ProfileContainer);
 
-export default connect(mapStateToProps, { addPost, updateNewPost, addLike, setUserProfile, setMyProfile })(withRouter(withAuthNavigateContainer));
+export default compose(
+  connect(mapStateToProps, { addPost, updateNewPost, addLike, setUserProfile, setMyProfile }),
+  withRouter,
+  withAuthNavigate,
+)(ProfileContainer);
