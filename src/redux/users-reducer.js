@@ -150,7 +150,7 @@ export const currentScreenUp = (newStartPage) => ({ type: SCREEN_UP, newStartPag
 export const toggleFollowingProgress = (isFetching, userId) => ({ type: TOGGLE_IS_FOLOWING_PROGRESS, isFetching, userId })
 
 
-// ************************  Санки )) *****************************
+// ************************  Санки  *****************************
 
 export const getUsers = (currentPage, pageSize) => {
   return (dispatch) => {

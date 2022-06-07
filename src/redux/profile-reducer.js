@@ -1,3 +1,5 @@
+import { profileAPI } from './../api/api';
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST = 'UPDATE-NEW-POST';
 const ADD_LIKE_TO_POST = 'ADD-LIKE-TO-POST';
@@ -77,6 +79,24 @@ export const addPost = (text) => ({ type: ADD_POST, text })
 export const updateNewPost = (newText) => ({ type: UPDATE_NEW_POST, newText })
 export const addLike = (postId) => ({ type: ADD_LIKE_TO_POST, postId })
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
+
+// ****************************** Санки *****************************************
+
+export const setMyProfile = (myUserId, paramsUserId) => {
+  return (dispatch) => {
+    let userId = paramsUserId;
+    debugger;
+    if (!userId && !myUserId) {
+      userId = 2;
+    } else if (!paramsUserId) {
+      userId = myUserId;
+    }
+
+    profileAPI.getProfile(userId).then(data => {
+      dispatch(setUserProfile(data));
+    })
+  }
+}
 
 
 export default profileReducer;

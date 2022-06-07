@@ -1,6 +1,7 @@
 import React from "react";
-import s from './../ProfileInfo/ProfileInfo.module.css'
-import profileImage from './../../../images/mountains.jpg'
+import s from './../ProfileInfo/ProfileInfo.module.css';
+import profileImage from './../../../images/mountains.jpg';
+import noPhoto from './../../../images/user.png';
 
 const ProfileInfo = (props) => {
   return (
@@ -10,7 +11,7 @@ const ProfileInfo = (props) => {
       </div>
       <div className={s.profileInfo}>
         <div className={s.ava}>
-          <img className={s.avaImg} src={props.profile.photos.large} alt="ФОТО ОТСУТСТВУЕТ" />
+          <img className={s.avaImg} src={!props.profile.photos.large ? noPhoto : props.profile.photos.large} alt="ФОТО ОТСУТСТВУЕТ" />
         </div>
         <div className={s.item}>
           Обо мне: {props.profile.aboutMe}

@@ -16,7 +16,6 @@ import {
 
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-// import { usersAPI } from './../../api/api';
 
 class UsersContainer extends React.Component {
 
