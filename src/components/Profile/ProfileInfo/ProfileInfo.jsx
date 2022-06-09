@@ -18,7 +18,9 @@ const ProfileInfo = (props) => {
           <img className={s.avaImg} src={!props.profile.photos.large ? noPhoto : props.profile.photos.large} alt="ФОТО ОТСУТСТВУЕТ" />
         </div>
         <div className={s.status}>
-          <ProfileStatus status={"Не делайте мне нервы, их еще есть кому испортить... "} />
+          <ProfileStatus status={props.status}
+            updateStatus={props.updateStatus}
+            myId={props.myId} />
         </div>
         <div className={s.item}>
           Обо мне: {props.profile.aboutMe}

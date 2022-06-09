@@ -30,7 +30,13 @@ export const profileAPI = {
   // FIXME Подготовил API для получения статуса
   getProfileStatus(userId) {
     return (
-      instance.get(`profile/status${userId}`)
+      instance.get(`profile/status/${userId}`)
+        .then(response => response.data)
+    )
+  },
+  updateProfileStatus(status) {
+    return (
+      instance.put(`profile/status/`, { status: status })
         .then(response => response.data)
     )
   }
