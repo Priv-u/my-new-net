@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addLike, addPost, updateNewPost, setUserProfile, setProfile, getStatus, updateStatus } from './../../redux/profile-reducer';
+import { addLike, addPost, setUserProfile, setProfile, getStatus, updateStatus } from './../../redux/profile-reducer';
 import Profile from "./Profile";
 import { withRouter } from './../common/withRouter';
 import { withAuthNavigate } from "../../hoc/withAuthNavigate";
@@ -11,7 +11,7 @@ import { compose } from "redux";
 class ProfileContainer extends React.Component {
 
   componentDidMount() {
-    debugger;
+    // debugger;
 
     this.props.setProfile(this.props.myId, this.props.router.params.userId);
     this.props.getStatus(this.props.myId, this.props.router.params.userId);
@@ -39,8 +39,14 @@ let mapStateToProps = (state) => (
   }
 )
 
+// let addPost = (dispatch) => {
+//   return {
+//     addPost: (newMessageBody) => { dispatch(addPost(newMessageBody)) },
+//   }
+// }
+
 export default compose(
-  connect(mapStateToProps, { addPost, updateNewPost, addLike, setUserProfile, setProfile, getStatus, updateStatus }),
+  connect(mapStateToProps, { addPost, addLike, setUserProfile, setProfile, getStatus, updateStatus }),
   withRouter,
   withAuthNavigate,
 )(ProfileContainer);

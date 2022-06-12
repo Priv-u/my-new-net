@@ -3,6 +3,8 @@ import Preloader from "../common/Preloader/Preloader";
 import Post from './Post/Post';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import s from './Profile.module.css';
+import { reduxForm, Field } from "redux-form";
+
 
 
 const Profile = (props) => {
@@ -16,17 +18,41 @@ const Profile = (props) => {
 
   let postElementsUi = postElements.reverse();
 
-  let addPost = () => {
-    props.addPost();
+  // let addPost = () => {
+  //   props.addPost();
+  // }
+
+  // let onPostChange = (e) => {
+  //   let text = e.currentTarget.value;
+  //   props.updateNewPost(text);
+  // }
+
+  let addNewMessage = (values) => {
+    debugger;
+    props.addPost(values.newMessageBody);
   }
 
-  let onPostChange = (e) => {
-    let text = e.currentTarget.value;
-    props.updateNewPost(text);
-  }
   if (!props.profile) {
     return <Preloader />
   }
+
+  const AddMessageForm = (props) => {
+    return (
+      <form onSubmit={props.handleSubmit} >
+        <div >
+          <div className={s.newMessage}>
+            <Field name="newMessageBody" component="textarea" placeholder="Введите текст поста" />
+          </div>
+          <div className={s.newMessageButton}>
+            <button >Новый пост</button>
+          </div>
+        </div>
+      </form>
+    )
+  }
+
+  const AddMessageReduxForm = reduxForm({ form: "dialogAddMessageForm" })(AddMessageForm);
+
   return (
     <div>
       <ProfileInfo profile={props.profile}
@@ -34,18 +60,13 @@ const Profile = (props) => {
         updateStatus={props.updateStatus}
         myId={props.myId} />
 
-      <div className={s.newMessage}>
-        <textarea onChange={onPostChange} value={props.newPost} />
-
-        <div className={s.newMessageButton}>
-          <button onClick={addPost}>Новый пост</button>
-        </div>
-      </div>
+      <AddMessageReduxForm onSubmit={addNewMessage} />
       <div className={s.posts}>
         {postElementsUi}
       </div>
 
     </div>
   );
+  //TODO Зарефакторить на базе redux-form - внедрить форму и поменять ее обработку
 }
 export default Profile;

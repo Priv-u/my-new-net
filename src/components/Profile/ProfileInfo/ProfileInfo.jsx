@@ -1,6 +1,5 @@
 import React from "react";
 import s from './../ProfileInfo/ProfileInfo.module.css';
-// import profileImage from './../../../images/mountains.jpg';
 import noPhoto from './../../../images/user.png';
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
 

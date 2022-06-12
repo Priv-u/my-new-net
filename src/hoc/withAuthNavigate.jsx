@@ -16,5 +16,5 @@ export const withAuthNavigate = (Component) => {
   }
   let withAuthNavigateComponent = connect(mapStateToProps)(NavigateComponent);
   return withAuthNavigateComponent;
-  //TODO Добввить сюда mapStateToProps и обернуть функцию в connect для того, чтобы передать в нее isAuth
+
 }

@@ -27,7 +27,7 @@ class ProfileStatus extends React.Component {
       status: e.currentTarget.value
     })
   }
-
+  //TODO посмотреть использование React Final Form
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.status !== this.props.status) {
       this.setState({
