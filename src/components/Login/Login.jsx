@@ -11,7 +11,7 @@ import { Navigate } from 'react-router-dom';
 
 const LoginForm = (props) => {
 
-  // debugger;
+  debugger;
   return (
     <form className={s.form} onSubmit={props.handleSubmit}>
       <div className={s.inputLogin}>
@@ -23,6 +23,10 @@ const LoginForm = (props) => {
       <div className={s.remember}>
         <Field name={'rememberMe'} component="input" type="checkbox" /> Запомнить меня
       </div>
+      {props.error &&
+        <div className={s.summaryError}>
+          {props.error}
+        </div>}
       <div className={s.buttonLogin}>
         <button  >LogIn</button>
       </div>
