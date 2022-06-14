@@ -2,17 +2,15 @@ import React from "react";
 import s from './Messages.module.css'
 import Message from "./Message/Message";
 import { Navigate } from "react-router-dom";
+import { reduxForm, Field } from "redux-form";
+import { maxValidLength } from "../../../utils/validators/validators";
+import { Textarea } from "../../common/FormsControls/FormsControls";
+
 
 
 const Messages = (props) => {
-
-  let addMessage = () => {
-    props.addMessage();
-  }
-
-  let onMessageChange = (e) => {
-    let text = e.currentTarget.value;
-    props.updateNewMessageText(text);
+  let addNewDialogsMessage = (values) => {
+    props.addMessage(values.newDialogMessage);
   }
 
   let messageUi = props.messages.map(m => <Message
@@ -20,24 +18,36 @@ const Messages = (props) => {
     message={m.message}
     messageDate={m.messageDate}
     messageTime={m.messageTime} />);
+
   if (props.isAuth === false) {
     return <Navigate to={'/login'} />
+
   }
+
+  const AddNewDialogMessage = (props) => {
+    const maxLength200 = maxValidLength(200);
+
+    return (
+      <form onSubmit={props.handleSubmit} className={s.newMessage}>
+        <div className={s.text}>
+          <Field name="newDialogMessage" component={Textarea} placeholder="Введите текст нового сообщения" validate={[maxLength200]}
+          />
+        </div>
+        <div className={s.sendMessage}>
+          <button>Отправить</button>
+        </div>
+      </form>
+    )
+  }
+
+  const AddNewDialogMessageReduxForm = reduxForm({ form: "dialogMessageForm" })(AddNewDialogMessage)
+
   return (
     <div >
       <div className={s.messages}>
         {messageUi}
       </div>
-      <div className={s.newMessage}>
-
-        <div className={s.text}>
-          <textarea onChange={onMessageChange} value={props.newMessage}></textarea>
-        </div>
-        <div className={s.sendMessage}>
-          <button onClick={addMessage}>Отправить</button>
-        </div>
-      </div>
-
+      <AddNewDialogMessageReduxForm onSubmit={addNewDialogsMessage} />
     </div>
   )
 }
