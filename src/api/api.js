@@ -43,14 +43,7 @@ export const profileAPI = {
 
 }
 
-export const authAPI = {
-  getAuth() {
-    return (
-      instance.get(`auth/me`)
-        .then(response => response.data)
-    )
-  }
-}
+
 
 export const followAPI = {
   setFollow(userId) {
@@ -67,5 +60,27 @@ export const followAPI = {
   }
 }
 
+export const authAPI = {
+  getAuth() {
+    return (
+      instance.get(`auth/me`)
+        .then(response => response.data)
+    )
+  },
 
+  login(email, password, rememderMe = false) {
+    return (
+      instance.post(`auth/login`, { email, password, rememderMe })
+        .then(response => response.data)
+    )
+  },
+
+  logOut() {
+    return (
+      instance.delete(`auth/login`)
+        .then(response => response.data)
+    )
+  },
+
+}
 

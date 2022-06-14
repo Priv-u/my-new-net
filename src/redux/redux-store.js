@@ -18,7 +18,6 @@ let reducers = combineReducers(
 
 );
 
-// TODO Перед продакшеном удалить из createStore второй аргумент
 let store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
 window.store = store;

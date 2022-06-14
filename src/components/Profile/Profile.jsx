@@ -4,8 +4,11 @@ import Post from './Post/Post';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import s from './Profile.module.css';
 import { reduxForm, Field } from "redux-form";
+import { Textarea } from "../common/FormsControls/FormsControls";
+import { maxValidLength } from "../../utils/validators/validators";
 
 
+const maxLength200 = maxValidLength(200);
 
 const Profile = (props) => {
   let postElements = props.posts.map((p) => <Post
@@ -18,15 +21,6 @@ const Profile = (props) => {
 
   let postElementsUi = postElements.reverse();
 
-  // let addPost = () => {
-  //   props.addPost();
-  // }
-
-  // let onPostChange = (e) => {
-  //   let text = e.currentTarget.value;
-  //   props.updateNewPost(text);
-  // }
-
   let addNewMessage = (values) => {
     debugger;
     props.addPost(values.newMessageBody);
@@ -37,16 +31,21 @@ const Profile = (props) => {
   }
 
   const AddMessageForm = (props) => {
+
+
+
     return (
-      <form onSubmit={props.handleSubmit} >
-        <div >
-          <div className={s.newMessage}>
-            <Field name="newMessageBody" component="textarea" placeholder="Введите текст поста" />
-          </div>
-          <div className={s.newMessageButton}>
-            <button >Новый пост</button>
-          </div>
+      <form className={s.newMessage} onSubmit={props.handleSubmit} >
+        <div className={s.newText}>
+          <Field name="newMessageBody"
+            component={Textarea}
+            placeholder="Введите текст поста" validate={[maxLength200]}
+          />
         </div>
+        <div className={s.newMessageButton}>
+          <button >Новый пост</button>
+        </div>
+
       </form>
     )
   }
@@ -67,6 +66,6 @@ const Profile = (props) => {
 
     </div>
   );
-  //TODO Зарефакторить на базе redux-form - внедрить форму и поменять ее обработку
+
 }
 export default Profile;

@@ -1,0 +1,30 @@
+.formControl textarea {
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.formControl input {
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+/* .formControl type:checkbox {
+  border: 1px solid black;
+  border-radius: 10px;
+} */
+
+.formControl.error input,
+.formControl.error textarea {
+  border: 2px solid red;
+  border-radius: px;
+  color: darkred;
+  background-color: pink;
+  margin: 2px;
+}
+
+.errorMessage {
+  font-size: 14px;
+  color: red;
+  font-style: normal;
+  margin: 0 auto;
+}

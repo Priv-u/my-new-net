@@ -1,5 +1,4 @@
 const ADD_NEW_DIALOG_MESSAGE = 'ADD-NEW-DIALOG-MESSAGE';
-const UPDATE_NEW_DIALOG_MESSAGE = 'UPDATE-NEW-DIALOG-MESSAGE';
 
 let initialState = {
   dialogs:
@@ -15,18 +14,13 @@ let initialState = {
     [
       { id: 1, message: 'Первое сообщение', messageDate: '10/05/2022', messageTime: '08:10' },
       { id: 2, message: 'Второе сообщение', messageDate: '10/05/2022', messageTime: '08:12' }
-
-    ],
-  newMessage: ''
+    ]
 }
 
 const dialogReducer = (state = initialState, action) => {
 
-
-
   switch (action.type) {
     case ADD_NEW_DIALOG_MESSAGE:
-
       let newMessageId = state.messages.length + 1;
       let date = new Date();
       let now = {
@@ -48,44 +42,27 @@ const dialogReducer = (state = initialState, action) => {
       if (now.minutes < 10) {
         now.minutes = String('0' + now.minutes);
       }
-
       let newMessageText = {
         id: newMessageId,
-        message: state.newMessage,
+        message: action.newDialogMessage,
         messageDate: String(now.day + '/' + now.month + '/' + now.year),
         messageTime: String(now.hours + ':' + now.minutes)
       }
-
       if (newMessageText.message !== '') {
         return {
           ...state,
-          messages: [...state.messages, newMessageText],
-          newMessage: ''
+          messages: [...state.messages, newMessageText]
         }
       }
       break;
-
-    case UPDATE_NEW_DIALOG_MESSAGE:
-      return {
-        ...state,
-        newMessage: action.newMessageFromUi
-      }
 
     default:
       return state;
   }
 }
 
-
-export const addMessageActionCreator = () => {
-  return { type: ADD_NEW_DIALOG_MESSAGE }
-}
-
-export const updateNewMessageActionCreator = (text) => {
-  return {
-    type: UPDATE_NEW_DIALOG_MESSAGE,
-    newMessageFromUi: text
-  }
+export const addMessage = (newDialogMessage) => {
+  return { type: ADD_NEW_DIALOG_MESSAGE, newDialogMessage }
 }
 
 export default dialogReducer;

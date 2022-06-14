@@ -13,7 +13,16 @@ const Header = (props) => {
           Projcet net
         </div>
         <div className={s.loginBlock}>
-          {props.isAuth ? <div className={s.login} >{props.login}</div> : <NavLink className={s.login} to='/login'> Вход/Регистрация</NavLink>}
+          {props.isAuth ?
+            <div className={s.login} >
+              <div>
+                {props.login}
+              </div>
+              <div onClick={props.logOut}>
+                Выход
+              </div>
+            </div> :
+            <NavLink className={s.login} to='/login'> Вход/Регистрация</NavLink>}
         </div>
       </div>
     </div>
